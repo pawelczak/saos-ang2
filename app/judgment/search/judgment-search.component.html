@@ -1,0 +1,115 @@
+<div class="container" >
+
+    <!-- JUDGMENT SEARCH FORM -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well">
+
+                <form class="form-horizontal" (ngSubmit)="onSubmit()" #judgmentSearch="ngForm" >
+
+                    <fieldset>
+
+                        <legend>SEARCH FORM</legend>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">All</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="All"
+                                       [(ngModel)]="model.all"
+                                       ngControl="all" #all="ngForm" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Judge name</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="e.g. John Doe"
+                                       [(ngModel)]="model.judgeName"
+                                       ngControl="judgeName" #judgeName="ngForm" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Court type</label>
+                            <div class="col-sm-6">
+                                <select class="form-control"
+                                        [ngModel]="model.courtType"
+                                        (change)="updateCourtType($event, courtType.value)"
+                                        #courtType >
+                                    <option *ngFor="#c of courtTypes"
+                                            [value]="c"
+                                            >{{c | courtType }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-6">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <p class="content-header">
+        SEARCH RESULTS <span class="small">{{totalResults}} JUDGMENTS</span>
+    </p>
+
+
+    <!-- PAGINATION -->
+    <p *ngIf="totalPageNumber > 0" >
+        Page {{pageNumber + 1}} of {{totalPageNumber}}.
+    </p>
+
+
+    <!--
+    <select [(ngModel)]="sortingForm.sortingField" >
+        <option *ngFor="#sf of sortingFields"
+                [value]="sf" >
+            {{sf}}
+        </option>
+    </select>
+    -->
+
+    <nav *ngIf="totalPageNumber > 0" >
+        <ul class="pagination">
+            <li>
+                <a (click)="changePage(-pageNumber)"
+                   *ngIf="pageNumber !== 0"
+                   aria-label="Previous"
+                >
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li *ngIf="pageNumber > 2" ><a (click)="changePage(-3)" >{{pageNumber - 2}}</a></li>
+            <li *ngIf="pageNumber > 1" ><a (click)="changePage(-2)" >{{pageNumber - 1}}</a></li>
+            <li *ngIf="pageNumber > 0" ><a (click)="changePage(-1)" >{{pageNumber}}</a></li>
+
+            <li class="active" ><a (click)="changePage(0)" >{{pageNumber + 1}}</a></li>
+
+            <li *ngIf="pageNumber + 2 < totalPageNumber" ><a (click)="changePage(1)" >{{pageNumber + 2}}</a></li>
+            <li *ngIf="pageNumber + 3 < totalPageNumber" ><a (click)="changePage(2)" >{{pageNumber + 3}}</a></li>
+            <li *ngIf="pageNumber + 4 < totalPageNumber" ><a (click)="changePage(3)" >{{pageNumber + 4}}</a></li>
+
+            <li>
+                <a (click)="changePage(totalPageNumber - pageNumber - 1)"
+                   *ngIf="pageNumber < totalPageNumber - 1"
+                   aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <judgment-list [judgments]="judgments" ></judgment-list>
+
+</div>

@@ -1,0 +1,11 @@
+.*
+!.gitignore
+!.gitkeep
+!.bowerrc
+npm-debug.log
+/lib/
+/node_modules/
+/app/*.js
+/app/**/*.js
+/app/*.js.map
+/app/**/*.js.map

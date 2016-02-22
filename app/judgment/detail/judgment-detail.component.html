@@ -1,0 +1,45 @@
+<div class="container" >
+
+    <p class="back-link btn btn-primary"
+       (click)="gotoJudgmentSearch()" >Back to judgment search</p>
+
+    <h1 class="content-header">FULL JUDGMENT DETAILS</h1>
+
+    <div *ngIf="judgment" class="judgment-detail">
+
+
+        <detail [label]="'Judgment date'" [value]="judgment.judgmentDate"></detail>
+
+        <detail [label]="'Court type'" [value]="judgment.courtType"></detail>
+
+        <div *ngIf="judgment.judges.length > 0" class="row judges" >
+            <span class="col-sm-2" >Judges:</span>
+            <span class="col-sm-8" >
+                <ul>
+                    <li *ngFor="#judge of judgment.judges">
+                        {{judge.name}}
+                    </li>
+                </ul>
+            </span>
+        </div>
+
+        <div *ngIf="judgment.keywords.length > 0" class="row keywords" >
+            <span class="col-sm-2" >Keywords:</span>
+            <span class="col-sm-8" >
+                <ul>
+                    <li *ngFor="#keyword of judgment.keywords">
+                        {{keyword}}
+                    </li>
+                </ul>
+            </span>
+        </div>
+
+
+        <div *ngIf="judgment.textContent.length > 0">
+            <h2 class="content-header">TEXT CONTENT</h2>
+            <p [innerHtml]="judgment.textContent" ></p>
+        </div>
+
+    </div>
+
+</div>

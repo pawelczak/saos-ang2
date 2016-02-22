@@ -1,0 +1,66 @@
+<html>
+<head>
+    <!-- Set the base href -->
+    <base href="/">
+
+    <title>SAOS ang2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,700,700italic&amp;subset=latin,cyrillic-ext,greek-ext,latin-ext,cyrillic"/>
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- United bootstrap theme -->
+    <link rel="stylesheet" href="assets/stylesheets/united-theme.css" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/stylesheets/styles.css" />
+
+</head>
+<body>
+
+    <app>Loading...</app>
+
+
+    <!-- Load libraries -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+    <script src="https://code.angularjs.org/2.0.0-beta.3/http.dev.js"></script>
+
+    <script src="https://npmcdn.com/a2-in-memory-web-api/web-api.js"></script>
+
+    <!-- Configure SystemJS -->
+    <script>
+        System.config({
+            packages: {
+                app: {
+                    format: 'register',
+                    defaultExtension: 'js'
+                }
+            }
+        });
+        System.import('app/main')
+                .then(null, console.error.bind(console));
+    </script>
+
+
+    <!-- JS Libs -->
+
+    <!-- JQuery -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</body>
+</html>

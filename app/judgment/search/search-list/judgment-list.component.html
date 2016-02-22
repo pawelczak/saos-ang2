@@ -1,0 +1,23 @@
+<ul class="judgment-list">
+    <li *ngFor="#judgment of judgments">
+
+
+        <h2 (click)="onClick(judgment)" >{{judgment.courtCases[0].caseNumber}}</h2>
+
+        <p>{{judgment.courtType}}</p>
+
+        <p class="judges"
+            *ngIf="judgment.judges.length > 0" >
+            Judges:
+            <span *ngFor="#judge of judgment.judges" >{{judge.name}}</span>
+        </p>
+
+        <p class="keywords"
+           *ngIf="judgment.keywords.length > 0" >
+            Keywords:
+            <span *ngFor="#keyword of judgment.keywords" >{{keyword}}</span>
+        </p>
+
+        <p>{{judgment.textContent | substr:0:300 }}</p>
+    </li>
+</ul>

@@ -1,0 +1,27 @@
+.judgment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.judgment-list li {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+.judgment-list li:last-child {
+    border-bottom: 1px solid #ccc;
+}
+
+.judgment-list h2 {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.judgment-list h2:hover {
+    color: #666;
+}
+
+.judgment-list .keywords span {
+    margin-right: 5px;
+}
