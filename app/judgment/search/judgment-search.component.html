@@ -43,6 +43,81 @@
                             </div>
                         </div>
 
+                        <div [ngSwitch]="model.courtType">
+                            <template ngSwitchWhen="COMMON">
+
+                                <div class="form-group" >
+                                    <label class="col-sm-2 control-label">Court</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control"
+                                                [disabled]="commonCourts === undefined || commonCourts.length === 0"
+                                                [ngModel]="model.commonCourt"
+                                                (change)="updateCommonCourt($event, commonCourt.value)"
+                                                #commonCourt >
+                                            <option *ngFor="#c of commonCourts"
+                                                    [value]="c.id"
+                                            >{{c.name}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group"  >
+                                    <label class="col-sm-2 control-label">Court division</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control"
+                                                [disabled]="commonCourtDivisions === undefined || commonCourtDivisions.length === 0"
+                                                [ngModel]="model.commonCourtDivision"
+                                                (change)="updateCommonCourtDivision($event, commonCourtDivision.value)"
+                                                #commonCourtDivision >
+                                            <option *ngFor="#c of commonCourtDivisions"
+                                                    [value]="c.id"
+                                            >{{c.name}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </template>
+                            <template ngSwitchWhen="SUPREME">
+
+                                <div class="form-group" >
+                                    <label class="col-sm-2 control-label">Chamber</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control"
+                                                [disabled]="scChambers === undefined || scChambers.length === 0"
+                                                [ngModel]="model.scChamberId"
+                                                (change)="updateScChamber($event, scChamber.value)"
+                                                #scChamber >
+                                            <option *ngFor="#c of scChambers"
+                                                    [value]="c.id"
+                                            >{{c.name}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group"  >
+                                    <label class="col-sm-2 control-label">Chamber division</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control"
+                                                [disabled]="scChamberDivisions === undefined || scChamberDivisions.length === 0"
+                                                [ngModel]="model.scChamberDivisionId"
+                                                (change)="updateScChamberDivision($event, scChamberDivision.value)"
+                                                #scChamberDivision >
+                                            <option *ngFor="#c of scChamberDivisions"
+                                                    [value]="c.id"
+                                            >{{c.name}}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </template>
+                            <template ngSwitchDefault></template>
+                        </div>
+
+
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
                                 <button type="submit" class="btn btn-primary">Search</button>

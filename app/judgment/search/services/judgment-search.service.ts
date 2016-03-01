@@ -3,11 +3,11 @@ import {Observable} from "rxjs/Observable";
 import {Response} from "angular2/http";
 import {URLSearchParams} from "angular2/http";
 import {Http} from "angular2/http";
-import {JudgmentSearchForm} from "../search-form/judgment-search-form";
-import {Judgment} from "../judgment";
-import {SearchResults} from "./search-results";
 import {JudgmentConverter} from "./judgment.converter";
 import {SortingForm} from "../forms/sorting-form";
+import {JudgmentSearchForm} from "../forms/judgment-search-form";
+import {Judgment} from "../models/judgment";
+import {SearchResults} from "../models/search-results";
 
 
 @Injectable()
@@ -25,6 +25,11 @@ export class JudgmentSearchService {
     search(judgmentSearchForm: JudgmentSearchForm, pageNumber: number, sortingForm: SortingForm) {
 
 
+        //Convertion
+        if (judgmentSearchForm.courtType === "All") {
+            judgmentSearchForm.courtType = "";
+        }
+
         var searchParams = new URLSearchParams();
         searchParams.set("all", judgmentSearchForm.all);
         searchParams.set("judgeName", judgmentSearchForm.judgeName);
@@ -34,7 +39,31 @@ export class JudgmentSearchService {
         searchParams.set("sortingField", sortingForm.sortingField);
         searchParams.set("sortingDirection", "DESC");
 
-        return this._http.get(this._judgmentUrl, {search: searchParams})
+        if (judgmentSearchForm.courtType === "COMMON") {
+
+            if (judgmentSearchForm.commonCourt !== "" && judgmentSearchForm.commonCourt !== "-1") {
+                searchParams.set("ccCourtId", judgmentSearchForm.commonCourt);
+            }
+
+            if (judgmentSearchForm.commonCourtDivision !== "" && judgmentSearchForm.commonCourtDivision !== "-1") {
+                searchParams.set("ccDivisionId", judgmentSearchForm.commonCourtDivision);
+            }
+        }
+
+        if (judgmentSearchForm.courtType === "SUPREME") {
+
+            if (judgmentSearchForm.scChamberId !== "" && judgmentSearchForm.scChamberId !== "-1") {
+                searchParams.set("scChamberId", judgmentSearchForm.scChamberId);
+            }
+
+            if (judgmentSearchForm.scChamberDivisionId !== "" && judgmentSearchForm.scChamberDivisionId !== "-1") {
+                searchParams.set("scDivisionId", judgmentSearchForm.scChamberDivisionId);
+            }
+        }
+
+
+        return this._http
+            .get(this._judgmentUrl, {search: searchParams})
             .map(res => {
                 var results = res.json(),
                     judgments = <Judgment[]>results.items;
@@ -42,8 +71,8 @@ export class JudgmentSearchService {
                 this._judgmentConverter.convertList(judgments);
 
                 return new SearchResults(results.info.totalResults, judgments);
-            })
-            .catch(this.handleError);
+            });
+            //.catch(this.handleError);
     }
 
 

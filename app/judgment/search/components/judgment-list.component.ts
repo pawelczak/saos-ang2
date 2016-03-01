@@ -1,7 +1,8 @@
 import {Component} from "angular2/core";
 import {Router} from "angular2/router";
 import {SubstrPipe} from "../../../utils/substr.pipe";
-import {Judgment} from "../judgment";
+import {Judgment} from "../models/judgment";
+
 
 @Component({
     selector: 'judgment-list',

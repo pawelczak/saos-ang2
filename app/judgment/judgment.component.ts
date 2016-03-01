@@ -14,6 +14,4 @@ import {JudgmentDetailComponent} from "./detail/judgment-detail.component";
     {path: '/', name: 'JudgmentSearch', component: JudgmentSearchComponent, useAsDefault: true},
     {path: '/:id', name: 'JudgmentDetail', component: JudgmentDetailComponent}
 ])
-export class JudgmentComponent {
-
-}
+export class JudgmentComponent {}
