@@ -1,6 +1,6 @@
 import {Injectable} from "angular2/core";
-import {CourtTypeConverter} from "../../../court/services/court-type.converter";
 import {Judgment} from "../models/judgment";
+import {CourtTypeConverter} from "../../../court/court-type/services/court-type.converter";
 
 @Injectable()
 export class JudgmentConverter {

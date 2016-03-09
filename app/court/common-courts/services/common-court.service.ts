@@ -7,10 +7,8 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class CommonCourtService {
 
-
     private _commonCourtURL: string = "https://www.saos.org.pl/cc/courts/list";
     private _commonCourtDivisions: string = "https://www.saos.org.pl/cc/courts/CC_COURT_ID/courtDivisions/list";
-
 
     constructor(
         private _http: Http
@@ -19,15 +17,16 @@ export class CommonCourtService {
 
     getCommonCourts() {
 
-        return this._http.get(this._commonCourtURL)
+        return this._http
+            .get(this._commonCourtURL)
             .map(res => res.json())
             .catch(this.handleError);
-
     }
 
     getCommonCourtDivisions(id: string) {
 
-        return this._http.get(this._commonCourtDivisions.replace("CC_COURT_ID", id))
+        return this._http
+            .get(this._commonCourtDivisions.replace("CC_COURT_ID", id))
             .map(res => res.json())
             .catch(this.handleError);
     }

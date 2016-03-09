@@ -3,17 +3,17 @@ import {NgForm} from 'angular2/common';
 import {OnInit} from "angular2/core";
 import {JudgmentSearchService} from "./services/judgment-search.service";
 import {JudgmentConverter} from "./services/judgment.converter";
-import {CourtTypeConverter} from "../../court/services/court-type.converter";
-import {CourtTypePipe} from "../../court/pipes/court-type.pipe";
 import {SortingForm} from "./forms/sorting-form";
-import {CommonCourtService} from "../../court/services/common-court.service";
-import {SupremeChamberService} from "../../court/services/supreme-chamber.service";
 import {JudgmentSearchForm} from "./forms/judgment-search-form";
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
 import {Judgment} from "./models/judgment";
 import {SearchResults} from "./models/search-results";
 import {JudgmentListComponent} from "./components/judgment-list.component";
+import {CourtTypeConverter} from "../../court/court-type/services/court-type.converter";
+import {CourtTypePipe} from "../../court/court-type/pipes/court-type.pipe";
+import {SupremeChamberService} from "../../court/supreme-courts/services/supreme-chamber.service";
+import {CommonCourtService} from "../../court/common-courts/services/common-court.service";
 
 @Component({
     templateUrl: 'app/judgment/search/judgment-search.component.html',
@@ -75,12 +75,12 @@ export class JudgmentSearchComponent implements OnInit {
         private _supremeChamberService: SupremeChamberService
     ) {
         this._searchFormStream
-                .switchMap((model:JudgmentSearchForm) => this._judgmentSearchService.search(model, this.pageNumber, this.sortingForm))
-                .subscribe((searchResults: SearchResults) => {
-                    this.judgments = searchResults.judgments;
-                    this.totalResults = searchResults.totalResults;
-                    this.totalPageNumber = Math.ceil(searchResults.totalResults/this.pageSize);
-                });
+            .switchMap((model:JudgmentSearchForm) => this._judgmentSearchService.search(model, this.pageNumber, this.sortingForm))
+            .subscribe((searchResults: SearchResults) => {
+                this.judgments = searchResults.judgments;
+                this.totalResults = searchResults.totalResults;
+                this.totalPageNumber = Math.ceil(searchResults.totalResults/this.pageSize);
+            });
     }
 
     ngOnInit() {
@@ -121,7 +121,9 @@ export class JudgmentSearchComponent implements OnInit {
 
             this.clearCommonCourtTypeModel();
 
-            this._supremeChamberService.getSupremeChambers()
+            this._supremeChamberService
+                .getSupremeChambers()
+                .map(res => res.json())
                 .subscribe(res => {
                     this.scChambers = res;
                     this.scChambers.unshift({id: -1, name: "All"});
@@ -138,7 +140,8 @@ export class JudgmentSearchComponent implements OnInit {
         if (parseInt(this.model.commonCourt) > 0) {
 
             //Load commonCourtDivisions
-            this._commonCourtService.getCommonCourtDivisions(this.model.commonCourt)
+            this._commonCourtService
+                .getCommonCourtDivisions(this.model.commonCourt)
                 .subscribe(res => {
                         this.commonCourtDivisions = res;
                         this.commonCourtDivisions.unshift({id: -1, name: "All"});
@@ -159,7 +162,9 @@ export class JudgmentSearchComponent implements OnInit {
         if (parseInt(this.model.scChamberId) > 0) {
 
             //Load scChamberId
-            this._supremeChamberService.getSupremeChamberDivisions(this.model.scChamberId)
+            this._supremeChamberService
+                .getSupremeChamberDivisions(this.model.scChamberId)
+                .map(res => res.json())
                 .subscribe(res => {
                         this.scChamberDivisions = res;
                         this.scChamberDivisions.unshift({id: -1, name: "All"});

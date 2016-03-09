@@ -72,6 +72,7 @@ export class JudgmentSearchService {
 
                 return new SearchResults(results.info.totalResults, judgments);
             });
+
             //.catch(this.handleError);
     }
 

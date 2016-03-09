@@ -2,8 +2,8 @@ import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from
 import {provide} from "angular2/core";
 
 import {JudgmentDetailConverter} from "./judgment-detail.converter";
-import {CourtTypeConverter} from "../../../court/services/court-type.converter";
-
+import {Judgment} from "../models/judgment";
+import {CourtTypeConverter} from "../../../court/court-type/services/court-type.converter";
 
 export function main() {
 
@@ -26,13 +26,25 @@ export function main() {
         it ("should convert", inject([JudgmentDetailConverter], (judgmentDetailConverter) => {
 
             //given
-            let givenJudgmentData = {courtType: "COMMON"};
+            let givenJudgmentData: any = {
+                id: 12,
+                courtType: "COMMON",
+                judgmentDate: "2016-01-20",
+                textContent: "text content",
+                keywords: ["first keyword", "second keyword"],
+                judges: [{name: "Jon Doe"}, {name: "Jane Doe"}]
+            };
 
             //execute
-            let expectedJudgment = judgmentDetailConverter.convert(givenJudgmentData);
+            let expectedJudgment: Judgment = judgmentDetailConverter.convert(givenJudgmentData);
 
             //assert
+            expect(expectedJudgment.id).toBe(12);
             expect(expectedJudgment.courtType).toEqual("Sąd Powszechny");
+            expect(expectedJudgment.judgmentDate).toBe("2016-01-20");
+            expect(expectedJudgment.textContent).toBe("text content");
+            expect(expectedJudgment.keywords).toEqual(["first keyword", "second keyword"]);
+            expect(expectedJudgment.judges).toEqual([{name: "Jon Doe"}, {name: "Jane Doe"}]);
 
         }));
 

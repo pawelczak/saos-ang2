@@ -4,7 +4,6 @@ import {Injectable} from "angular2/core";
 import {Response} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 import {JudgmentDetailConverter} from "./judgment-detail.converter";
-import {Judgment} from "../../search/judgment";
 
 @Injectable()
 export class JudgmentDetailService {
@@ -22,7 +21,7 @@ export class JudgmentDetailService {
 
         return this._http.get(this._judgmentUrl + id)
             .map(res => {
-                return this._judgmentDetailConverter.convert(<Judgment>res.json().data);
+                return this._judgmentDetailConverter.convert(res.json().data);
             })
             .catch(this.handleError);
     }

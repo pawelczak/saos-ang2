@@ -1,5 +1,6 @@
 import {Injectable} from "angular2/core";
-import {CourtTypeConverter} from "../../../court/services/court-type.converter";
+import {CourtTypeConverter} from "../../../court/court-type/services/court-type.converter";
+import {Judgment} from "../models/judgment";
 
 @Injectable()
 export class JudgmentDetailConverter {
@@ -9,10 +10,14 @@ export class JudgmentDetailConverter {
     ) {}
 
 
-    convert(rawJudgmentData: any) {
+    convert(rawJudgmentData: any): Judgment {
 
-        let judgment: any = rawJudgmentData;
+        let judgment: Judgment = new Judgment(rawJudgmentData.id);
 
+        judgment.textContent = rawJudgmentData.textContent;
+        judgment.judgmentDate = rawJudgmentData.judgmentDate;
+        judgment.judges = rawJudgmentData.judges;
+        judgment.keywords = rawJudgmentData.keywords;
         judgment.courtType = this._courtTypeConverter.convert(judgment.courtType);
 
         return judgment;

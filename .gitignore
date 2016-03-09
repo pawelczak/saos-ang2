@@ -3,7 +3,7 @@
 !.gitkeep
 !.bowerrc
 npm-debug.log
-/lib/
+/libs/
 /node_modules/
 /app/*.js
 /app/**/*.js

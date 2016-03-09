@@ -19,7 +19,8 @@ export class SupremeChamberService {
 
     getSupremeChambers() {
 
-        return this._http.get(this._supremeChamberURL)
+        return this._http
+            .get(this._supremeChamberURL)
             .map(res => res.json())
             .catch(this.handleError);
 
@@ -27,7 +28,8 @@ export class SupremeChamberService {
 
     getSupremeChamberDivisions(id: string) {
 
-        return this._http.get(this._supremeChamberDivisionURL.replace("SC_CHAMBER_ID", id))
+        return this._http
+            .get(this._supremeChamberDivisionURL.replace("SC_CHAMBER_ID", id))
             .map(res => res.json())
             .catch(this.handleError);
     }
