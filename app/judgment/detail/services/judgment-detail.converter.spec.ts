@@ -39,10 +39,11 @@ export function main() {
             let expectedJudgment: Judgment = judgmentDetailConverter.convert(givenJudgmentData);
 
             //assert
-            expect(expectedJudgment.id).toBe(12);
+            expect(expectedJudgment instanceof Judgment).toEqual(true);
+            expect(expectedJudgment.id).toEqual(12);
             expect(expectedJudgment.courtType).toEqual("Sąd Powszechny");
-            expect(expectedJudgment.judgmentDate).toBe("2016-01-20");
-            expect(expectedJudgment.textContent).toBe("text content");
+            expect(expectedJudgment.judgmentDate).toEqual("2016-01-20");
+            expect(expectedJudgment.textContent).toEqual("text content");
             expect(expectedJudgment.keywords).toEqual(["first keyword", "second keyword"]);
             expect(expectedJudgment.judges).toEqual([{name: "Jon Doe"}, {name: "Jane Doe"}]);
 

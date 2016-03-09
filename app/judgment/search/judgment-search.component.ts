@@ -14,6 +14,9 @@ import {CourtTypeConverter} from "../../court/court-type/services/court-type.con
 import {CourtTypePipe} from "../../court/court-type/pipes/court-type.pipe";
 import {SupremeChamberService} from "../../court/supreme-courts/services/supreme-chamber.service";
 import {CommonCourtService} from "../../court/common-courts/services/common-court.service";
+import {CommonCourtConverter} from "../../court/common-courts/services/common-court.converter";
+import {CommonCourt} from "../../court/common-courts/models/common-court";
+import {CommonCourtDivision} from "../../court/common-courts/models/common-court-division";
 
 @Component({
     templateUrl: 'app/judgment/search/judgment-search.component.html',
@@ -34,6 +37,7 @@ import {CommonCourtService} from "../../court/common-courts/services/common-cour
         JudgmentConverter,
         CourtTypeConverter,
         CommonCourtService,
+        CommonCourtConverter,
         SupremeChamberService
     ],
     pipes: [CourtTypePipe]
@@ -55,10 +59,10 @@ export class JudgmentSearchComponent implements OnInit {
     public sortingFields = ["JUDGMENT_DATE", "DATABASE_ID", "REFERENCING_JUDGMENTS_COUNT"];
     public sortingForm: SortingForm = new SortingForm(this.sortingFields[0]);
 
-    public commonCourts: any[] = [];
+    public commonCourts: CommonCourt[] = [];
     public commonCourtError: string = "";
 
-    public commonCourtDivisions: any[] = [];
+    public commonCourtDivisions: CommonCourtDivision[] = [];
     public commonCourtDivisionsError: string = "";
 
     public scChambers: any[] = [];
@@ -112,7 +116,7 @@ export class JudgmentSearchComponent implements OnInit {
             this._commonCourtService.getCommonCourts()
                 .subscribe(res => {
                     this.commonCourts = res;
-                    this.commonCourts.unshift({id: -1, name: "All"});
+                    this.commonCourts.unshift(new CommonCourt(-1, "All", ""));
                 },
                 error => this.commonCourtError);
         }
@@ -135,6 +139,7 @@ export class JudgmentSearchComponent implements OnInit {
 
     updateCommonCourt(event: string, value: string): void {
         this.model.commonCourt = value;
+        this.model.commonCourtDivision = "";
         this.commonCourtDivisions = [];
 
         if (parseInt(this.model.commonCourt) > 0) {
@@ -144,7 +149,7 @@ export class JudgmentSearchComponent implements OnInit {
                 .getCommonCourtDivisions(this.model.commonCourt)
                 .subscribe(res => {
                         this.commonCourtDivisions = res;
-                        this.commonCourtDivisions.unshift({id: -1, name: "All"});
+                        this.commonCourtDivisions.unshift(new CommonCourtDivision(-1, "All"));
                     },
                     error => this.commonCourtDivisionsError);
         }

@@ -5,13 +5,40 @@ import {provide} from "angular2/core";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {CommonCourtService} from "./common-court.service";
+import {CommonCourtConverter} from "./common-court.converter";
+import {CommonCourt} from "../models/common-court";
+import {CommonCourtDivision} from "../models/common-court-division";
 
 export function main() {
+
+    let rawCcData = [{id: 1, name: "Sąd Apelacyjny we Wrocławiu", type: "APPEAL"},
+        {id: 34, name: "Sąd Apelacyjny w Białymstoku", type: "APPEAL"},
+        {id: 59, name: "Sąd Apelacyjny w Gdańsku", type: "APPEAL"}];
+    let rawCcDivisionData = [{id: 1, name: "I Wydział Cywilny"},
+        {id: 2, name: "II Wydział Karny"},
+        {id: 3, name: "III Wydział Pracy i Ubezpieczeń Społecznych"}];
+
+    class CommonCourtConverterMock {
+
+        convertCcList(args) {
+            return [new CommonCourt(1, "Sąd Apelacyjny we Wrocławiu", "APPEAL"),
+                new CommonCourt(34, "Sąd Apelacyjny we Białymstoku", "APPEAL"),
+                new CommonCourt(59, "Sąd Apelacyjny we Gdańsku", "APPEAL")];
+        }
+
+        convertCcDivisionList(args) {
+            return [new CommonCourtDivision(1, "I Wydział Cywilny"),
+                new CommonCourtDivision(2, "II Wydział Karny"),
+                new CommonCourtDivision(3, "III Wydział Pracy i Ubezpieczeń Społecznych")];
+        }
+    }
+
 
     describe("CommonCourtService", () => {
 
         beforeEachProviders(() => [
             CommonCourtService,
+            provide(CommonCourtConverter, {useClass: CommonCourtConverterMock}),
             BaseRequestOptions,
             MockBackend,
             provide(Http, {
@@ -29,9 +56,7 @@ export function main() {
 
                 beforeEach(inject([MockBackend], (backend: MockBackend) => {
                     const baseResponse = new Response(new ResponseOptions({
-                        body: [{id: 1, name: "Sąd Apelacyjny we Wrocławiu", type: "APPEAL"},
-                            {id: 34, name: "Sąd Apelacyjny w Białymstoku", type: "APPEAL"},
-                            {id: 59, name: "Sąd Apelacyjny w Gdańsku", type: "APPEAL"}]
+                        body: JSON.stringify(rawCcData)
                     }));
                     backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
                 }));
@@ -42,10 +67,10 @@ export function main() {
                             .getCommonCourts()
                             .subscribe((courts) => {
 
-                                expect(courts.length).toBe(3);
-                                expect(courts[0].id).toBe(1);
-                                expect(courts[0].name).toBe("Sąd Apelacyjny we Wrocławiu");
-                                expect(courts[0].type).toBe("APPEAL");
+                                expect(courts.length).toBe(rawCcData.length);
+                                expect(courts[0].id).toBe(rawCcData[0].id);
+                                expect(courts[0].name).toBe(rawCcData[0].name);
+                                expect(courts[0].type).toBe(rawCcData[0].type);
                             });
                     })
                 );
@@ -82,7 +107,7 @@ export function main() {
 
                 beforeEach(inject([MockBackend], (backend: MockBackend) => {
                     const baseResponse = new Response(new ResponseOptions({
-                        body: [{id: 1, name: "I Wydział Cywilny"}, {id: 2, name: "II Wydział Karny"}, {id: 3, name: "III Wydział Pracy i Ubezpieczeń Społecznych"}]
+                        body: JSON.stringify(rawCcDivisionData)
                     }));
                     backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
                 }));
@@ -94,9 +119,9 @@ export function main() {
                             .getCommonCourtDivisions("1")
                             .subscribe((divisions) => {
 
-                                expect(divisions.length).toBe(3);
-                                expect(divisions[1].id).toBe(2);
-                                expect(divisions[1].name).toBe("II Wydział Karny");
+                                expect(divisions.length).toBe(rawCcDivisionData.length);
+                                expect(divisions[1].id).toBe(rawCcDivisionData[1].id);
+                                expect(divisions[1].name).toBe(rawCcDivisionData[1].name);
                             });
                     })
                 );
