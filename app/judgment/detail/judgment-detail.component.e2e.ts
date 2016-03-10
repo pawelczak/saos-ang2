@@ -1,4 +1,3 @@
-//import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from 'angular2/testing';
 
 describe('AppComponent', () => {
 
