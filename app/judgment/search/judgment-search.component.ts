@@ -127,7 +127,6 @@ export class JudgmentSearchComponent implements OnInit {
 
             this._supremeChamberService
                 .getSupremeChambers()
-                .map(res => res.json())
                 .subscribe(res => {
                     this.scChambers = res;
                     this.scChambers.unshift({id: -1, name: "All"});
@@ -169,7 +168,6 @@ export class JudgmentSearchComponent implements OnInit {
             //Load scChamberId
             this._supremeChamberService
                 .getSupremeChamberDivisions(this.model.scChamberId)
-                .map(res => res.json())
                 .subscribe(res => {
                         this.scChamberDivisions = res;
                         this.scChamberDivisions.unshift({id: -1, name: "All"});

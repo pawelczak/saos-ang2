@@ -2,6 +2,7 @@ import {describe, expect, it, xit, inject, beforeEach, beforeEachProviders} from
 import {HomeComponent} from "./home.component";
 
 export function main() {
+
     describe('HomeComponent', () => {
 
         let homeComponent:HomeComponent = null;

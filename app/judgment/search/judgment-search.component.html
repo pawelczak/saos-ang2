@@ -135,7 +135,7 @@
 
 
     <p class="content-header">
-        SEARCH RESULTS <span class="small">{{totalResults}} JUDGMENTS</span>
+        SEARCH RESULTS <span class="small" *ngIf="totalResults > 0" >{{totalResults}} JUDGMENTS</span>
     </p>
 
 

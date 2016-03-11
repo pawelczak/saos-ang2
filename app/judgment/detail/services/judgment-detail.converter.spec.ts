@@ -46,11 +46,8 @@ export function main() {
             expect(expectedJudgment.textContent).toEqual("text content");
             expect(expectedJudgment.keywords).toEqual(["first keyword", "second keyword"]);
             expect(expectedJudgment.judges).toEqual([{name: "Jon Doe"}, {name: "Jane Doe"}]);
-
         }));
 
     });
 
-
 }
-
