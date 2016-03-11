@@ -11,7 +11,7 @@ import {JudgmentComponent} from "./judgment.component";
 export function main() {
 
     describe("JudgmentComponent", () => {
-
+/*
         var location, router;
 
         //setup
@@ -27,7 +27,7 @@ export function main() {
             location = l;
         }));
 
-        /*
+
         it('Should be able to navigate to base search judgment view', done => {
             router.navigate(['/']).then(() => {
                 expect(location.path()).toBe('/');
