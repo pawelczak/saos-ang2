@@ -29,6 +29,8 @@ export class JudgmentDetailComponent implements OnInit {
     ) {}
 
 
+    //------------------------ LOGIC --------------------------
+
     ngOnInit() {
         this._judgmentDetailService
             .getJudgment(this._routeParams.get("id"))

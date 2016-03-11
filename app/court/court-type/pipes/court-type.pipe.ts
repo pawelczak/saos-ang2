@@ -6,6 +6,9 @@ import {PipeTransform} from "angular2/core";
 })
 export class CourtTypePipe implements PipeTransform {
 
+
+    //------------------------ LOGIC --------------------------
+
     transform(value: string, args: string[]) {
 
         switch (value) {

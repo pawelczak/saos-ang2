@@ -10,6 +10,8 @@ export class JudgmentDetailConverter {
     ) {}
 
 
+    //------------------------ LOGIC --------------------------
+
     convert(rawJudgmentData: any): Judgment {
 
         let judgment: Judgment = new Judgment(rawJudgmentData.id);

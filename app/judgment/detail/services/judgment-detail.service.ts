@@ -17,6 +17,8 @@ export class JudgmentDetailService {
     ) {}
 
 
+    //------------------------ LOGIC --------------------------
+
     getJudgment(id: string) {
 
         return this._http.get(this._judgmentUrl + id)
@@ -26,6 +28,8 @@ export class JudgmentDetailService {
             .catch(this.handleError);
     }
 
+
+    //------------------------ PRIVATE --------------------------
 
     private handleError (error: Response) {
         // in a real world app, we may send the server to some remote logging infrastructure

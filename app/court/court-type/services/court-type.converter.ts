@@ -3,6 +3,9 @@ import {Injectable} from "angular2/core";
 @Injectable()
 export class CourtTypeConverter {
 
+
+    //------------------------ LOGIC --------------------------
+
     convert(courtType: string):string {
 
         switch (courtType) {

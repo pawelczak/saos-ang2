@@ -2,8 +2,6 @@ import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from
 import {BaseRequestOptions, Response, ResponseOptions, Http} from 'angular2/http';
 import {MockBackend, MockConnection} from 'angular2/http/testing';
 import {provide} from "angular2/core";
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import {CommonCourtService} from "./common-court.service";
 import {CommonCourtConverter} from "./common-court.converter";
 import {CommonCourt} from "../models/common-court";
@@ -67,10 +65,10 @@ export function main() {
                             .getCommonCourts()
                             .subscribe((courts) => {
 
-                                expect(courts.length).toBe(rawCcData.length);
-                                expect(courts[0].id).toBe(rawCcData[0].id);
-                                expect(courts[0].name).toBe(rawCcData[0].name);
-                                expect(courts[0].type).toBe(rawCcData[0].type);
+                                expect(courts.length).toEqual(rawCcData.length);
+                                expect(courts[0].id).toEqual(rawCcData[0].id);
+                                expect(courts[0].name).toEqual(rawCcData[0].name);
+                                expect(courts[0].type).toEqual(rawCcData[0].type);
                             });
                     })
                 );
@@ -93,7 +91,7 @@ export function main() {
                             .getCommonCourts()
                             .subscribe((courts) => {
                             }, (error) => {
-                                expect(error).toBe("Error 500");
+                                expect(error).toEqual("Error 500");
                             });
                     })
                 );
@@ -119,9 +117,9 @@ export function main() {
                             .getCommonCourtDivisions("1")
                             .subscribe((divisions) => {
 
-                                expect(divisions.length).toBe(rawCcDivisionData.length);
-                                expect(divisions[1].id).toBe(rawCcDivisionData[1].id);
-                                expect(divisions[1].name).toBe(rawCcDivisionData[1].name);
+                                expect(divisions.length).toEqual(rawCcDivisionData.length);
+                                expect(divisions[1].id).toEqual(rawCcDivisionData[1].id);
+                                expect(divisions[1].name).toEqual(rawCcDivisionData[1].name);
                             });
                     })
                 );
@@ -145,7 +143,7 @@ export function main() {
                             .getCommonCourtDivisions("1")
                             .subscribe((divisions) => {
                             }, (error) => {
-                                expect(error).toBe("Error 500");
+                                expect(error).toEqual("Error 500");
                             });
                     })
                 );

@@ -11,11 +11,12 @@ export class SupremeChamberService {
     private _supremeChamberURL: string = "https://www.saos.org.pl/sc/chambers/list";
     private _supremeChamberDivisionURL: string = "https://www.saos.org.pl/sc/chambers/SC_CHAMBER_ID/chamberDivisions/list";
 
-
     constructor(
         private _http: Http
     ) {}
 
+
+    //------------------------ LOGIC --------------------------
 
     getSupremeChambers() {
 
@@ -23,7 +24,6 @@ export class SupremeChamberService {
             .get(this._supremeChamberURL)
             .map(res => res.json())
             .catch(this.handleError);
-
     }
 
     getSupremeChamberDivisions(id: string) {
@@ -34,6 +34,8 @@ export class SupremeChamberService {
             .catch(this.handleError);
     }
 
+
+    //------------------------ PRIVATE --------------------------
 
     private handleError (error: Response) {
         // in a real world app, we may send the server to some remote logging infrastructure

@@ -20,6 +20,4 @@ import {HTTP_PROVIDERS} from "angular2/http";
     {path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true},
     {path: '/judgments/...', name: 'Judgments', component: JudgmentComponent}
 ])
-export class AppComponent {
-
-}
+export class AppComponent {}
