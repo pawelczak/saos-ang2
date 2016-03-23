@@ -17,6 +17,9 @@ import {CommonCourtService} from "../../court/common-courts/services/common-cour
 import {CommonCourtConverter} from "../../court/common-courts/services/common-court.converter";
 import {CommonCourt} from "../../court/common-courts/models/common-court";
 import {CommonCourtDivision} from "../../court/common-courts/models/common-court-division";
+import {SupremeChamber} from "../../court/supreme-courts/models/supreme-chamber";
+import {SupremeChamberDivision} from "../../court/supreme-courts/models/supreme-chamber-division";
+import {SupremeChamberConverter} from "../../court/supreme-courts/services/supreme-chamber.converter";
 
 @Component({
     templateUrl: 'app/judgment/search/judgment-search.component.html',
@@ -38,7 +41,8 @@ import {CommonCourtDivision} from "../../court/common-courts/models/common-court
         CourtTypeConverter,
         CommonCourtService,
         CommonCourtConverter,
-        SupremeChamberService
+        SupremeChamberService,
+        SupremeChamberConverter
     ],
     pipes: [CourtTypePipe]
 })
@@ -65,8 +69,8 @@ export class JudgmentSearchComponent implements OnInit {
     public commonCourtDivisions: CommonCourtDivision[] = [];
     public commonCourtDivisionsError: string = "";
 
-    public scChambers: any[] = [];
-    public scChamberDivisions: any[] = [];
+    public scChambers: SupremeChamber[] = [];
+    public scChamberDivisions: SupremeChamberDivision[] = [];
 
     public scChamberError: string;
     public scChamberDivisionError: string;
@@ -129,7 +133,7 @@ export class JudgmentSearchComponent implements OnInit {
                 .getSupremeChambers()
                 .subscribe(res => {
                     this.scChambers = res;
-                    this.scChambers.unshift({id: -1, name: "All"});
+                    this.scChambers.unshift(new SupremeChamber(-1, "All"));
                 },
                 error => this.scChamberError);
         }
@@ -170,7 +174,7 @@ export class JudgmentSearchComponent implements OnInit {
                 .getSupremeChamberDivisions(this.model.scChamberId)
                 .subscribe(res => {
                         this.scChamberDivisions = res;
-                        this.scChamberDivisions.unshift({id: -1, name: "All"});
+                        this.scChamberDivisions.unshift(new SupremeChamberDivision(-1, "All"));
                     },
                     error => this.scChamberDivisionError);
         }

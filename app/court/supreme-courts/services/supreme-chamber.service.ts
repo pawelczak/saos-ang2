@@ -2,6 +2,7 @@ import {Injectable} from "angular2/core";
 import {Http} from "angular2/http";
 import {Response} from "angular2/http";
 import {Observable} from "rxjs/Observable";
+import {SupremeChamberConverter} from "./supreme-chamber.converter";
 
 
 @Injectable()
@@ -12,7 +13,8 @@ export class SupremeChamberService {
     private _supremeChamberDivisionURL: string = "https://www.saos.org.pl/sc/chambers/SC_CHAMBER_ID/chamberDivisions/list";
 
     constructor(
-        private _http: Http
+        private _http: Http,
+        private _supremeChamberConverter: SupremeChamberConverter
     ) {}
 
 
@@ -22,7 +24,9 @@ export class SupremeChamberService {
 
         return this._http
             .get(this._supremeChamberURL)
-            .map(res => res.json())
+            .map((res) => {
+                return this._supremeChamberConverter.convertChamberList(res.json());
+            })
             .catch(this.handleError);
     }
 
@@ -30,7 +34,9 @@ export class SupremeChamberService {
 
         return this._http
             .get(this._supremeChamberDivisionURL.replace("SC_CHAMBER_ID", id))
-            .map(res => res.json())
+            .map((res) => {
+                return this._supremeChamberConverter.convertChamberDivisionList(res.json());
+            })
             .catch(this.handleError);
     }
 

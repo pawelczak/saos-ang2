@@ -5,6 +5,7 @@ import {provide} from "angular2/core";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {SupremeChamberService} from "./supreme-chamber.service";
+import {SupremeChamberConverter} from "./supreme-chamber.converter";
 
 export function main() {
 
@@ -12,6 +13,7 @@ export function main() {
 
         beforeEachProviders(() => [
             SupremeChamberService,
+            SupremeChamberConverter,//need to mock this
             BaseRequestOptions,
             MockBackend,
             provide(Http, {
