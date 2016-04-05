@@ -7,17 +7,37 @@ exports.config = {
     ],
     exclude: [],
 
-    framework: 'jasmine',
+    //framework: 'jasmine',
+
+    // set to "custom" instead of cucumber.
+    framework: 'custom',
+
+    // path relative to the current config file
+    frameworkPath: require.resolve('protractor-cucumber-framework'),
+
+    cucumberOpts: {
+        require: [
+            'test/e2e/features/steps/*.steps.js'
+        ],
+        format: 'pretty'
+    },
+
+    specs: [
+        'test/e2e/features/search.feature'
+    ],
 
     allScriptsTimeout: 110000,
 
+    /*
     jasmineNodeOpts: {
         showTiming: true,
         showColors: true,
         isVerbose: false,
         includeStackTrace: false,
         defaultTimeoutInterval: 400000
-    },
+    },*/
+
+
     directConnect: true,
 
     capabilities: {
@@ -26,6 +46,8 @@ exports.config = {
             'args': ['show-fps-counter=true']
         }
     },
+
+
 
     onPrepare: function() {
         browser.ignoreSynchronization = true;

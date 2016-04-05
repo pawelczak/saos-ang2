@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">All</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" placeholder="All"
+                                <input type="text" id="search-all" class="form-control" placeholder="All"
                                        [(ngModel)]="model.all"
                                        ngControl="all" #all="ngForm" />
                             </div>
@@ -120,7 +120,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" id="search-submit" class="btn btn-primary">Search</button>
                             </div>
                         </div>
                     </fieldset>
@@ -134,7 +134,7 @@
 
 
 
-    <p class="content-header">
+    <p id="search-total-results" class="content-header">
         SEARCH RESULTS <span class="small" *ngIf="totalResults > 0" >{{totalResults}} JUDGMENTS</span>
     </p>
 
