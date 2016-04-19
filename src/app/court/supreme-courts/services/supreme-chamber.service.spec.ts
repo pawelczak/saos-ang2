@@ -9,7 +9,8 @@ import {SupremeChamberConverter} from "./supreme-chamber.converter";
 import {SupremeChamber} from "../models/supreme-chamber";
 import {SupremeChamberDivision} from "../models/supreme-chamber-division";
 
-export function main() {
+
+describe("SupremeChamberService", () => {
 
     let rawScData = [{id: 1, name: "Izba Cywilna"},
         {id: 2, name: "Izba Karna"},
@@ -32,132 +33,128 @@ export function main() {
                 new SupremeChamberDivision(rawScDivData[1].id, rawScDivData[1].name),
                 new SupremeChamberDivision(rawScDivData[2].id, rawScDivData[2].name)];
         }
-
     }
 
+    beforeEachProviders(() => [
+        SupremeChamberService,
+        provide(SupremeChamberConverter, {useClass: SupremeChamberConverterMock}),
+        BaseRequestOptions,
+        MockBackend,
+        provide(Http, {
+            useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+                return new Http(backend, defaultOptions);
+            },
+            deps: [MockBackend, BaseRequestOptions]
+        })
+    ]);
 
-    describe("SupremeChamberService", () => {
+    describe("getSupremeChambers", () => {
 
-        beforeEachProviders(() => [
-            SupremeChamberService,
-            provide(SupremeChamberConverter, {useClass: SupremeChamberConverterMock}),
-            BaseRequestOptions,
-            MockBackend,
-            provide(Http, {
-                useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-                    return new Http(backend, defaultOptions);
-                },
-                deps: [MockBackend, BaseRequestOptions]
-            })
-        ]);
+        describe("success", () => {
 
-        describe("getSupremeChambers", () => {
-
-            describe("success", () => {
-
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        body: rawScData
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    body: rawScData
                 }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
 
-                it('should return response when subscribed to getSupremeChambers',
-                    inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
-                        supremeChamberService
-                            .getSupremeChambers()
-                            .subscribe((chambers) => {
+            it('should return response when subscribed to getSupremeChambers',
+                inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
+                    supremeChamberService
+                        .getSupremeChambers()
+                        .subscribe((chambers) => {
 
-                                expect(chambers.length).toBe(3);
-                                expect(chambers[2] instanceof SupremeChamber).toEqual(true);
-                                expect(chambers[2].id).toBe(3);
-                                expect(chambers[2].name).toBe("Izba Wojskowa");
-                            });
-                    })
-                );
-
-            });
-
-            describe("fail", () => {
-
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        status: 500,
-                        body: {error: "Error 500"}
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
-                }));
-
-                it('should return Error response when subscribed to getSupremeChambers',
-                    inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
-                        supremeChamberService
-                            .getSupremeChambers()
-                            .subscribe((chambers) => {
-                            }, (error) => {
-
-                                expect(error).toBe("Error 500");
-                            });
-                    })
-                );
-
-            });
+                            expect(chambers.length).toBe(3);
+                            expect(chambers[2] instanceof SupremeChamber).toEqual(true);
+                            expect(chambers[2].id).toBe(3);
+                            expect(chambers[2].name).toBe("Izba Wojskowa");
+                        });
+                })
+            );
 
         });
 
-        describe("getSupremeChamberDivisions", () => {
+        describe("fail", () => {
 
-            describe("success", () => {
-
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        body: rawScDivData
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    status: 500,
+                    body: {error: "Error 500"}
                 }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
 
-                it('should return response when subscribed to getSupremeChamberDivisions',
-                    inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
-                        supremeChamberService
-                            .getSupremeChamberDivisions("1")
-                            .subscribe((chambers) => {
+            it('should return Error response when subscribed to getSupremeChambers',
+                inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
+                    supremeChamberService
+                        .getSupremeChambers()
+                        .subscribe((chambers) => {
+                        }, (error) => {
 
-                                expect(chambers.length).toBe(3);
-                                expect(chambers[1] instanceof SupremeChamberDivision).toEqual(true);
-                                expect(chambers[1].id).toBe(2);
-                                expect(chambers[1].name).toBe("Wydział II");
-                            });
-                    })
-                );
-
-            });
-
-            describe("fail", () => {
-
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        status: 500,
-                        body: {error: "Error 500"}
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
-                }));
-
-                it('should return Error response when subscribed to getSupremeChamberDivisions',
-                    inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
-                        supremeChamberService
-                            .getSupremeChamberDivisions("1")
-                            .subscribe((chambers) => {
-                            },
-                            (error) => {
-
-                                expect(error).toBe("Error 500");
-                            });
-                    })
-                );
-
-            });
+                            expect(error).toBe("Error 500");
+                        });
+                })
+            );
 
         });
 
     });
 
-}
+    describe("getSupremeChamberDivisions", () => {
+
+        describe("success", () => {
+
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    body: rawScDivData
+                }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
+
+            it('should return response when subscribed to getSupremeChamberDivisions',
+                inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
+                    supremeChamberService
+                        .getSupremeChamberDivisions("1")
+                        .subscribe((chambers) => {
+
+                            expect(chambers.length).toBe(3);
+                            expect(chambers[1] instanceof SupremeChamberDivision).toEqual(true);
+                            expect(chambers[1].id).toBe(2);
+                            expect(chambers[1].name).toBe("Wydział II");
+                        });
+                })
+            );
+
+        });
+
+        describe("fail", () => {
+
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    status: 500,
+                    body: {error: "Error 500"}
+                }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
+
+            it('should return Error response when subscribed to getSupremeChamberDivisions',
+                inject([SupremeChamberService], (supremeChamberService: SupremeChamberService) => {
+                    supremeChamberService
+                        .getSupremeChamberDivisions("1")
+                        .subscribe((chambers) => {
+                        },
+                        (error) => {
+
+                            expect(error).toBe("Error 500");
+                        });
+                })
+            );
+
+        });
+
+    });
+
+});
+
+

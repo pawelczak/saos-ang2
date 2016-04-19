@@ -7,7 +7,11 @@ import {CommonCourtConverter} from "./common-court.converter";
 import {CommonCourt} from "../models/common-court";
 import {CommonCourtDivision} from "../models/common-court-division";
 
-export function main() {
+
+
+
+
+describe("CommonCourtService", () => {
 
     let rawCcData = [{id: 1, name: "Sąd Apelacyjny we Wrocławiu", type: "APPEAL"},
         {id: 34, name: "Sąd Apelacyjny w Białymstoku", type: "APPEAL"},
@@ -31,127 +35,121 @@ export function main() {
         }
     }
 
+    beforeEachProviders(() => [
+        CommonCourtService,
+        provide(CommonCourtConverter, {useClass: CommonCourtConverterMock}),
+        BaseRequestOptions,
+        MockBackend,
+        provide(Http, {
+            useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+                return new Http(backend, defaultOptions);
+            },
+            deps: [MockBackend, BaseRequestOptions]
+        })
+    ]);
 
-    describe("CommonCourtService", () => {
-
-        beforeEachProviders(() => [
-            CommonCourtService,
-            provide(CommonCourtConverter, {useClass: CommonCourtConverterMock}),
-            BaseRequestOptions,
-            MockBackend,
-            provide(Http, {
-                useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-                    return new Http(backend, defaultOptions);
-                },
-                deps: [MockBackend, BaseRequestOptions]
-            })
-        ]);
-
-        describe("getCommonCourts", () => {
+    describe("getCommonCourts", () => {
 
 
-            describe("success", () => {
+        describe("success", () => {
 
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        body: JSON.stringify(rawCcData)
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    body: JSON.stringify(rawCcData)
                 }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
 
-                it('should return response when subscribed to getCommonCourts',
-                    inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
-                        commonCourtService
-                            .getCommonCourts()
-                            .subscribe((courts) => {
+            it('should return response when subscribed to getCommonCourts',
+                inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
+                    commonCourtService
+                        .getCommonCourts()
+                        .subscribe((courts) => {
 
-                                expect(courts.length).toEqual(rawCcData.length);
-                                expect(courts[0].id).toEqual(rawCcData[0].id);
-                                expect(courts[0].name).toEqual(rawCcData[0].name);
-                                expect(courts[0].type).toEqual(rawCcData[0].type);
-                            });
-                    })
-                );
-            });
-
-
-            describe("fail", () => {
-
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        status: 500,
-                        body: {error: "Error 500"}
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
-                }));
-
-                it('should return Error response when subscribed to getCommonCourts',
-                    inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
-                        commonCourtService
-                            .getCommonCourts()
-                            .subscribe((courts) => {
-                            }, (error) => {
-                                expect(error).toEqual("Error 500");
-                            });
-                    })
-                );
-            });
-
+                            expect(courts.length).toEqual(rawCcData.length);
+                            expect(courts[0].id).toEqual(rawCcData[0].id);
+                            expect(courts[0].name).toEqual(rawCcData[0].name);
+                            expect(courts[0].type).toEqual(rawCcData[0].type);
+                        });
+                })
+            );
         });
 
-        describe("getCommonCourtDivisions for courtId '1' ", () => {
 
-            describe("success", () => {
+        describe("fail", () => {
 
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        body: JSON.stringify(rawCcDivisionData)
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    status: 500,
+                    body: {error: "Error 500"}
                 }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
 
-
-                it('should return response when subscribed to getCommonCourtDivisions',
-                    inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
-                        commonCourtService
-                            .getCommonCourtDivisions("1")
-                            .subscribe((divisions) => {
-
-                                expect(divisions.length).toEqual(rawCcDivisionData.length);
-                                expect(divisions[1].id).toEqual(rawCcDivisionData[1].id);
-                                expect(divisions[1].name).toEqual(rawCcDivisionData[1].name);
-                            });
-                    })
-                );
-
-            });
-
-            describe("fail", () => {
-
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        status: 500,
-                        body: {error: "Error 500"}
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
-                }));
-
-
-                it('should return response when subscribed to getCommonCourtDivisions',
-                    inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
-                        commonCourtService
-                            .getCommonCourtDivisions("1")
-                            .subscribe((divisions) => {
-                            }, (error) => {
-                                expect(error).toEqual("Error 500");
-                            });
-                    })
-                );
-
-            });
+            it('should return Error response when subscribed to getCommonCourts',
+                inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
+                    commonCourtService
+                        .getCommonCourts()
+                        .subscribe((courts) => {
+                        }, (error) => {
+                            expect(error).toEqual("Error 500");
+                        });
+                })
+            );
         });
 
     });
 
+    describe("getCommonCourtDivisions for courtId '1' ", () => {
 
-}
+        describe("success", () => {
+
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    body: JSON.stringify(rawCcDivisionData)
+                }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
+
+
+            it('should return response when subscribed to getCommonCourtDivisions',
+                inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
+                    commonCourtService
+                        .getCommonCourtDivisions("1")
+                        .subscribe((divisions) => {
+
+                            expect(divisions.length).toEqual(rawCcDivisionData.length);
+                            expect(divisions[1].id).toEqual(rawCcDivisionData[1].id);
+                            expect(divisions[1].name).toEqual(rawCcDivisionData[1].name);
+                        });
+                })
+            );
+
+        });
+
+        describe("fail", () => {
+
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    status: 500,
+                    body: {error: "Error 500"}
+                }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
+
+
+            it('should return response when subscribed to getCommonCourtDivisions',
+                inject([CommonCourtService], (commonCourtService: CommonCourtService) => {
+                    commonCourtService
+                        .getCommonCourtDivisions("1")
+                        .subscribe((divisions) => {
+                        }, (error) => {
+                            expect(error).toEqual("Error 500");
+                        });
+                })
+            );
+
+        });
+    });
+
+});

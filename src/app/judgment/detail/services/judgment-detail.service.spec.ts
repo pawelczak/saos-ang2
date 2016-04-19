@@ -6,93 +6,92 @@ import {Judgment} from "../models/judgment";
 import {JudgmentDetailService} from "./judgment-detail.service";
 import {JudgmentDetailConverter} from "./judgment-detail.converter";
 
-export function main() {
 
-    describe("JudgmentDetailService", () => {
+describe("JudgmentDetailService", () => {
 
-        let rawJudgment = {id: 12};
+    let rawJudgment = {id: 12};
 
-        class JudgmentDetailConverterMock {
-            convert(): Judgment {
-                let judgment = new Judgment(12);
+    class JudgmentDetailConverterMock {
+        convert(): Judgment {
+            let judgment = new Judgment(12);
 
-                return judgment;
-            }
+            return judgment;
         }
+    }
 
 
-        describe("getJudgment", () => {
+    describe("getJudgment", () => {
 
-            beforeEachProviders(() => [
-                JudgmentDetailService,
-                provide(JudgmentDetailConverter, {useClass: JudgmentDetailConverterMock}),
-                BaseRequestOptions,
-                MockBackend,
-                provide(Http, {
-                    useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-                        return new Http(backend, defaultOptions);
-                    },
-                    deps: [MockBackend, BaseRequestOptions]
+        beforeEachProviders(() => [
+            JudgmentDetailService,
+            provide(JudgmentDetailConverter, {useClass: JudgmentDetailConverterMock}),
+            BaseRequestOptions,
+            MockBackend,
+            provide(Http, {
+                useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
+                    return new Http(backend, defaultOptions);
+                },
+                deps: [MockBackend, BaseRequestOptions]
+            })
+        ]);
+
+        describe("success", () => {
+
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    status: 200,
+                    body: JSON.stringify(rawJudgment)
+                }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
+
+            it('should return response when subscribed to getJudgment',
+                inject([JudgmentDetailService], (judgmentDetailService: JudgmentDetailService) => {
+                    judgmentDetailService
+                        .getJudgment("12")
+                        .subscribe((judgment) => {
+
+                            //assert
+                            expect(judgment instanceof Judgment).toEqual(true);
+                            expect(judgment.id).toEqual(12);
+                        }, (error) => {
+
+                            //assert
+                            expect(error).not.toBeDefined();
+                        });
                 })
-            ]);
+            );
 
-            describe("success", () => {
+        });
 
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        status: 200,
-                        body: JSON.stringify(rawJudgment)
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+
+        describe("fail", () => {
+
+            beforeEach(inject([MockBackend], (backend: MockBackend) => {
+                const baseResponse = new Response(new ResponseOptions({
+                    status: 500,
+                    body: {error: "Error"}
                 }));
+                backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
+            }));
 
-                it('should return response when subscribed to getJudgment',
-                    inject([JudgmentDetailService], (judgmentDetailService: JudgmentDetailService) => {
-                        judgmentDetailService
-                            .getJudgment("12")
-                            .subscribe((judgment) => {
+            it('should return Error when subscribed to getJudgment',
+                inject([JudgmentDetailService], (judgmentDetailService: JudgmentDetailService) => {
+                    judgmentDetailService
+                        .getJudgment("12")
+                        .subscribe((judgment) => {
+                        }, (error) => {
 
-                                //assert
-                                expect(judgment instanceof Judgment).toEqual(true);
-                                expect(judgment.id).toEqual(12);
-                            }, (error) => {
-
-                                //assert
-                                expect(error).not.toBeDefined();
-                            });
-                    })
-                );
-
-            });
-
-
-            describe("fail", () => {
-
-                beforeEach(inject([MockBackend], (backend: MockBackend) => {
-                    const baseResponse = new Response(new ResponseOptions({
-                        status: 500,
-                        body: {error: "Error"}
-                    }));
-                    backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
-                }));
-
-                it('should return Error when subscribed to getJudgment',
-                    inject([JudgmentDetailService], (judgmentDetailService: JudgmentDetailService) => {
-                        judgmentDetailService
-                            .getJudgment("12")
-                            .subscribe((judgment) => {
-                            }, (error) => {
-
-                                //assert
-                                expect(error).toEqual("Error");
-                            });
-                    })
-                );
-
-            });
+                            //assert
+                            expect(error).toEqual("Error");
+                        });
+                })
+            );
 
         });
 
     });
 
-}
+});
+
+
