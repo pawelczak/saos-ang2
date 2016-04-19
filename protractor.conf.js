@@ -17,16 +17,17 @@ exports.config = {
 
     cucumberOpts: {
         require: [
-            'test/e2e/features/steps/*.steps.js'
+            'test/e2e/features/*/steps/*.steps.js'
         ],
         format: 'pretty'
     },
 
     specs: [
-        'test/e2e/features/search.feature'
+        'test/e2e/features/*/*.feature'
     ],
 
     allScriptsTimeout: 110000,
+    getPageTimeout: 100000,
 
     /*
     jasmineNodeOpts: {
