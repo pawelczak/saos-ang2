@@ -6,9 +6,9 @@ import {Judgment} from "../models/judgment";
 
 @Component({
     selector: 'judgment-list',
-    templateUrl: 'app/judgment/search/components/judgment-list.component.html',
+    templateUrl: 'src/app/judgment/search/components/judgment-list.component.html',
     inputs: ['judgments'],
-    styleUrls: ['app/judgment/search/components/judgment-list.styles.css'],
+    styleUrls: ['src/app/judgment/search/components/judgment-list.styles.css'],
     pipes: [SubstrPipe]
 })
 export class JudgmentListComponent {

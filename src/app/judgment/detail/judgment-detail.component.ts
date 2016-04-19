@@ -9,7 +9,7 @@ import {Judgment} from "./models/judgment";
 import {CourtTypeConverter} from "../../court/court-type/services/court-type.converter";
 
 @Component({
-    templateUrl: 'app/judgment/detail/judgment-detail.component.html',
+    templateUrl: 'src/app/judgment/detail/judgment-detail.component.html',
     providers: [
         JudgmentDetailService,
         JudgmentDetailConverter,

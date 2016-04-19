@@ -5,7 +5,9 @@
 npm-debug.log
 debug.log
 /libs/
+/dist/
 /node_modules/
+/coverage/
 /app/*.js
 /app/**/*.js
 /app/*.js.map

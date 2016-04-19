@@ -5,8 +5,9 @@ export function main() {
 
     describe('HomeComponent', () => {
 
-        let homeComponent:HomeComponent = null;
+        let homeComponent: HomeComponent = null;
 
+        /*
         beforeEach(() => {
             homeComponent = new HomeComponent();
         });
@@ -15,6 +16,7 @@ export function main() {
         it('should be defined', () => {
             expect(homeComponent).toBeDefined();
         });
+        */
 
     });
 }

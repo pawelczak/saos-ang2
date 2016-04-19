@@ -22,7 +22,7 @@ import {SupremeChamberDivision} from "../../court/supreme-courts/models/supreme-
 import {SupremeChamberConverter} from "../../court/supreme-courts/services/supreme-chamber.converter";
 
 @Component({
-    templateUrl: 'app/judgment/search/judgment-search.component.html',
+    templateUrl: 'src/app/judgment/search/judgment-search.component.html',
     styles: [`
     .ng-valid[required] {
       border-left: 5px solid #42A948; /* green */
