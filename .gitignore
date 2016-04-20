@@ -8,7 +8,8 @@ debug.log
 /dist/
 /node_modules/
 /coverage/
-/app/*.js
-/app/**/*.js
-/app/*.js.map
-/app/**/*.js.map
+
+/src/app/*.js
+/src/app/**/*.js
+/src/app/*.js.map
+/src/app/**/*.js.map

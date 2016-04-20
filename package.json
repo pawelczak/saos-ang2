@@ -4,12 +4,11 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
-    "test": "karma start",
-    "bower": "bower install",
-    "karma": "karma start",
+    "unit-tests": "karma start",
     "e2e-tests": "protractor",
     "webdriver-start": "webdriver-manager start",
-    "webdriver-update": "webdriver-manager update"
+    "webdriver-update": "webdriver-manager update",
+    "bower": "bower install"
   },
   "license": "ISC",
   "dependencies": {
