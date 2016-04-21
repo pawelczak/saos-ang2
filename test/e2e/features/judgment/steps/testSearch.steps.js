@@ -8,7 +8,7 @@ module.exports = function() {
 
     this.Given('I go to search page', function(next) {
 
-        browser.get('http://localhost:3000/judgments')
+        browser.get('webpack-dev-server/judgments')
             .then(function () {
                 next();
             });

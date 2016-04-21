@@ -5,7 +5,7 @@ module.exports = function() {
     
     this.Given('I go to search page', function(next) {
         
-        browser.get('http://localhost:3000/home')
+        browser.get('webpack-dev-server/home')
         .then(function () {
             next();
         });
