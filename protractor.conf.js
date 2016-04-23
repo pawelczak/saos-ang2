@@ -1,1 +1,1 @@
-module.exports = require('./config/protractor.conf.js');
+exports.config = require('./config/protractor.conf.js').config;

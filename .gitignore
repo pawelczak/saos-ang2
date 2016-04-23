@@ -13,3 +13,8 @@ debug.log
 /src/app/**/*.js
 /src/app/*.js.map
 /src/app/**/*.js.map
+
+# Typing #
+/src/typings/tsd/
+/typings/
+/tsd_typings/

@@ -1,3 +1,5 @@
+require('ts-node/register');
+
 exports.config = {
     baseUrl: 'http://localhost:8080/',
 
@@ -17,7 +19,7 @@ exports.config = {
 
     cucumberOpts: {
         require: [
-            'test/e2e/features/*/steps/*.steps.js'
+            'test/e2e/features/*/steps/*.steps.ts'
         ],
         format: 'pretty'
     },
@@ -29,16 +31,6 @@ exports.config = {
     allScriptsTimeout: 110000,
     getPageTimeout: 100000,
 
-    /*
-    jasmineNodeOpts: {
-        showTiming: true,
-        showColors: true,
-        isVerbose: false,
-        includeStackTrace: false,
-        defaultTimeoutInterval: 400000
-    },*/
-
-
     directConnect: true,
 
     capabilities: {
@@ -48,10 +40,9 @@ exports.config = {
         }
     },
 
-
-
     onPrepare: function() {
         browser.ignoreSynchronization = true;
+        browser.driver.manage().window().maximize();
     },
 
     seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar",

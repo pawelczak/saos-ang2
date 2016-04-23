@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --inline --progress --profile --colors --watch --display-error-details --display-cached --history-api-fallback",
     "unit-tests": "karma start",
     "e2e-tests": "protractor",
     "webdriver-start": "webdriver-manager start",
@@ -25,6 +25,7 @@
     "concurrently": "^1.0.0",
     "css-loader": "^0.23.1",
     "cucumber": "^0.9.1",
+    "exports-loader": "^0.6.3",
     "html-loader": "^0.4.3",
     "jasmine-core": "^2.3.4",
     "jasmine-spec-reporter": "^2.4.0",
@@ -47,6 +48,7 @@
     "style-loader": "^0.13.1",
     "traceur": "0.0.107",
     "ts-loader": "^0.7.2",
+    "ts-node": "^0.7.0",
     "typescript": "~1.8.9",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
