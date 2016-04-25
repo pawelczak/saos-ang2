@@ -17,7 +17,7 @@ import {HTTP_PROVIDERS} from "angular2/http";
     ]
 })
 @RouteConfig([
-    {path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true},
+    {path:'/home', name: 'Home', component: HomeComponent, useAsDefault: true},
     {path: '/judgments/...', name: 'Judgments', component: JudgmentComponent}
 ])
 export class AppComponent {}
