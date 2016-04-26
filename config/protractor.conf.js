@@ -3,13 +3,7 @@ require('ts-node/register');
 exports.config = {
     baseUrl: 'http://localhost:8080/',
 
-    // use `npm run e2e`
-    specs: [
-        //'app/**/*.e2e.js'
-    ],
     exclude: [],
-
-    //framework: 'jasmine',
 
     // set to "custom" instead of cucumber.
     framework: 'custom',
@@ -19,6 +13,7 @@ exports.config = {
 
     cucumberOpts: {
         require: [
+            'test/e2e/features/*/pages/*.page.ts',
             'test/e2e/features/*/steps/*.steps.ts'
         ],
         format: 'pretty'

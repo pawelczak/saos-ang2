@@ -14,6 +14,9 @@
     "pree2e-tests": "npm run webdriver:update -- --standalone",
     "e2e-tests": "protractor",
 
+    "pretests": "npm run unit-tests",
+    "tests": "npm run e2e-tests",
+
     "webdriver-manager": "webdriver-manager",
     "webdriver:update": "npm run webdriver-manager update",
     "bower": "bower install"

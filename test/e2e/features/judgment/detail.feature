@@ -4,9 +4,9 @@ Feature: Judgment Detail
 
   Scenario Outline:
     Given I go to judgment page specified by <id>
-    Then I should see judgment with results
+    Then I should see judgment with results <date>
 
     Examples:
 
-    | id | date | case_number |
-    | 1  | 12   | 123         |
+    | id | date         | case_number |
+    | 1  | 2012-09-14   | 123         |
