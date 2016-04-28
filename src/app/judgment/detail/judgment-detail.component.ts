@@ -1,12 +1,12 @@
-import {Component} from "angular2/core";
-import {OnInit} from "angular2/core";
-import {RouteParams} from "angular2/router";
-import {Router} from "angular2/router";
-import {JudgmentDetailService} from "./services/judgment-detail.service";
-import {DetailComponent} from "./components/detail.component";
-import {JudgmentDetailConverter} from "./services/judgment-detail.converter";
-import {Judgment} from "./models/judgment";
-import {CourtTypeConverter} from "../../court/court-type/services/court-type.converter";
+import {Component} from 'angular2/core';
+import {OnInit} from 'angular2/core';
+import {RouteParams} from 'angular2/router';
+import {Router} from 'angular2/router';
+import {JudgmentDetailService} from './services/judgment-detail.service';
+import {DetailComponent} from './components/detail.component';
+import {JudgmentDetailConverter} from './services/judgment-detail.converter';
+import {Judgment} from './models/judgment';
+import {CourtTypeConverter} from '../../court/court-type/services/court-type.converter';
 
 @Component({
     templateUrl: 'src/app/judgment/detail/judgment-detail.component.html',
@@ -29,11 +29,11 @@ export class JudgmentDetailComponent implements OnInit {
     ) {}
 
 
-    //------------------------ LOGIC --------------------------
+    // ------------------------ LOGIC --------------------------
 
     ngOnInit() {
         this._judgmentDetailService
-            .getJudgment(this._routeParams.get("id"))
+            .getJudgment(this._routeParams.get('id'))
             .subscribe(
                 result => {
                     this.judgment = result;

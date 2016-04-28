@@ -1,15 +1,15 @@
-import {Component} from "angular2/core";
-import {Http} from "angular2/http";
-import {Injectable} from "angular2/core";
-import {Response} from "angular2/http";
-import {Observable} from "rxjs/Observable";
-import {JudgmentDetailConverter} from "./judgment-detail.converter";
+import {Component} from 'angular2/core';
+import {Http} from 'angular2/http';
+import {Injectable} from 'angular2/core';
+import {Response} from 'angular2/http';
+import {Observable} from 'rxjs/Observable';
+import {JudgmentDetailConverter} from './judgment-detail.converter';
 
 @Injectable()
 export class JudgmentDetailService {
 
 
-    private _judgmentUrl = "https://www.saos.org.pl/api/judgments/";
+    private _judgmentUrl = 'https://www.saos.org.pl/api/judgments/';
 
     constructor(
         private _http: Http,
@@ -17,7 +17,7 @@ export class JudgmentDetailService {
     ) {}
 
 
-    //------------------------ LOGIC --------------------------
+    // ------------------------ LOGIC --------------------------
 
     getJudgment(id: string) {
 
@@ -29,7 +29,7 @@ export class JudgmentDetailService {
     }
 
 
-    //------------------------ PRIVATE --------------------------
+    // ------------------------ PRIVATE --------------------------
 
     private handleError (error: Response) {
         // in a real world app, we may send the server to some remote logging infrastructure

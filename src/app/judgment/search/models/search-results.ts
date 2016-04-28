@@ -1,4 +1,4 @@
-import {Judgment} from "./judgment";
+import {Judgment} from './judgment';
 
 export class SearchResults {
 

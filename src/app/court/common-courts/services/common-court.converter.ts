@@ -1,12 +1,12 @@
-import {Injectable} from "angular2/core";
-import {CommonCourt} from "../models/common-court";
-import {CommonCourtDivision} from "../models/common-court-division";
+import {Injectable} from 'angular2/core';
+import {CommonCourt} from '../models/common-court';
+import {CommonCourtDivision} from '../models/common-court-division';
 
 @Injectable()
 export class CommonCourtConverter {
 
 
-    //------------------------ LOGIC --------------------------
+    // ------------------------ LOGIC --------------------------
 
     convertCc(rawCommonCourt): CommonCourt {
         return new CommonCourt(rawCommonCourt.id, rawCommonCourt.name, rawCommonCourt.type);
@@ -16,7 +16,7 @@ export class CommonCourtConverter {
 
         let commonCourts = [];
 
-        for(let i = 0, length = rawCommonCourts.length; i < length; i += 1) {
+        for (let i = 0, length = rawCommonCourts.length; i < length; i += 1) {
             commonCourts.push(this.convertCc(rawCommonCourts[i]));
         }
 
@@ -31,7 +31,7 @@ export class CommonCourtConverter {
 
         let ccDivisions = [];
 
-        for(let i = 0, length = rawCcDivisions.length; i < length; i += 1) {
+        for (let i = 0, length = rawCcDivisions.length; i < length; i += 1) {
             ccDivisions.push(this.convertCcDivision(rawCcDivisions[i]));
         }
 

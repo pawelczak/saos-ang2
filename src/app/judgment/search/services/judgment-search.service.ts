@@ -1,13 +1,13 @@
-import {Injectable} from "angular2/core";
-import {Observable} from "rxjs/Observable";
-import {Response} from "angular2/http";
-import {URLSearchParams} from "angular2/http";
-import {Http} from "angular2/http";
-import {JudgmentConverter} from "./judgment.converter";
-import {SortingForm} from "../forms/sorting-form";
-import {JudgmentSearchForm} from "../forms/judgment-search-form";
-import {Judgment} from "../models/judgment";
-import {SearchResults} from "../models/search-results";
+import {Injectable} from 'angular2/core';
+import {Observable} from 'rxjs/Observable';
+import {Response} from 'angular2/http';
+import {URLSearchParams} from 'angular2/http';
+import {Http} from 'angular2/http';
+import {JudgmentConverter} from './judgment.converter';
+import {SortingForm} from '../forms/sorting-form';
+import {JudgmentSearchForm} from '../forms/judgment-search-form';
+import {Judgment} from '../models/judgment';
+import {SearchResults} from '../models/search-results';
 
 
 @Injectable()
@@ -25,39 +25,40 @@ export class JudgmentSearchService {
     search(judgmentSearchForm: JudgmentSearchForm, pageNumber: number, sortingForm: SortingForm) {
 
 
-        //Convertion
-        if (judgmentSearchForm.courtType === "All") {
-            judgmentSearchForm.courtType = "";
+        // Convertion
+        if (judgmentSearchForm.courtType === 'All') {
+            judgmentSearchForm.courtType = '';
         }
 
         var searchParams = new URLSearchParams();
-        searchParams.set("all", judgmentSearchForm.all);
-        searchParams.set("judgeName", judgmentSearchForm.judgeName);
-        searchParams.set("courtType", judgmentSearchForm.courtType);
-        searchParams.set("pageSize", "10");
-        searchParams.set("pageNumber", pageNumber + "");
-        searchParams.set("sortingField", sortingForm.sortingField);
-        searchParams.set("sortingDirection", "DESC");
+        searchParams.set('all', judgmentSearchForm.all);
+        searchParams.set('judgeName', judgmentSearchForm.judgeName);
+        searchParams.set('courtType', judgmentSearchForm.courtType);
+        searchParams.set('pageSize', '10');
+        searchParams.set('pageNumber', pageNumber + '');
+        searchParams.set('sortingField', sortingForm.sortingField);
+        searchParams.set('sortingDirection', 'DESC');
 
-        if (judgmentSearchForm.courtType === "COMMON") {
+        if (judgmentSearchForm.courtType === 'COMMON') {
 
-            if (judgmentSearchForm.commonCourt !== "" && judgmentSearchForm.commonCourt !== "-1") {
-                searchParams.set("ccCourtId", judgmentSearchForm.commonCourt);
+            if (judgmentSearchForm.commonCourt !== '' && judgmentSearchForm.commonCourt !== '-1') {
+                searchParams.set('ccCourtId', judgmentSearchForm.commonCourt);
             }
 
-            if (judgmentSearchForm.commonCourtDivision !== "" && judgmentSearchForm.commonCourtDivision !== "-1") {
-                searchParams.set("ccDivisionId", judgmentSearchForm.commonCourtDivision);
+            if (judgmentSearchForm.commonCourtDivision !== ''
+                && judgmentSearchForm.commonCourtDivision !== '-1') {
+                searchParams.set('ccDivisionId', judgmentSearchForm.commonCourtDivision);
             }
         }
 
-        if (judgmentSearchForm.courtType === "SUPREME") {
+        if (judgmentSearchForm.courtType === 'SUPREME') {
 
-            if (judgmentSearchForm.scChamberId !== "" && judgmentSearchForm.scChamberId !== "-1") {
-                searchParams.set("scChamberId", judgmentSearchForm.scChamberId);
+            if (judgmentSearchForm.scChamberId !== '' && judgmentSearchForm.scChamberId !== '-1') {
+                searchParams.set('scChamberId', judgmentSearchForm.scChamberId);
             }
 
-            if (judgmentSearchForm.scChamberDivisionId !== "" && judgmentSearchForm.scChamberDivisionId !== "-1") {
-                searchParams.set("scDivisionId", judgmentSearchForm.scChamberDivisionId);
+            if (judgmentSearchForm.scChamberDivisionId !== '' && judgmentSearchForm.scChamberDivisionId !== '-1') {
+                searchParams.set('scDivisionId', judgmentSearchForm.scChamberDivisionId);
             }
         }
 

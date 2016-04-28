@@ -32,7 +32,7 @@ module.exports = {
        *
        * See: https://github.com/wbuchwalter/tslint-loader
        */
-       { test: /\.ts$/, loader: 'tslint-loader', exclude: [ /node_modules/ ] }
+       //{ test: /\.ts$/, loader: 'tslint-loader', exclude: [ /node_modules/ ] }
 
     ],
 

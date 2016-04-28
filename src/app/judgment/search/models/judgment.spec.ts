@@ -1,5 +1,5 @@
 import {describe, expect, it, xit, inject, beforeEach, beforeEachProviders} from 'angular2/testing';
-import {Judgment} from "./judgment";
+import {Judgment} from './judgment';
 
 
 describe('Judgment interface', () => {
@@ -8,9 +8,9 @@ describe('Judgment interface', () => {
 
         //given
         let id:number = 1,
-            courtCases:any = "caseNumber",
-            textContent:string = "Lorem ipsum",
-            courtType: string = "COMMON",
+            courtCases:any = 'caseNumber',
+            textContent:string = 'Lorem ipsum',
+            courtType: string = 'COMMON',
             judgment:Judgment = {id: id, courtCases: courtCases, textContent: textContent, courtType: courtType};
 
         //assert

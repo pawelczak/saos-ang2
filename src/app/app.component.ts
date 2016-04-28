@@ -1,9 +1,8 @@
-import {Component} from "angular2/core";
-import {HomeComponent} from "./home/home.component";
-import {RouteConfig} from "angular2/router";
-import {ROUTER_DIRECTIVES} from "angular2/router";
-import {JudgmentComponent} from "./judgment/judgment.component";
-import {HTTP_PROVIDERS} from "angular2/http";
+import {Component} from 'angular2/core';
+import {HomeComponent} from './home/home.component';
+import {RouteConfig} from 'angular2/router';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {HTTP_PROVIDERS} from 'angular2/http';
 
 
 @Component({
@@ -18,6 +17,6 @@ import {HTTP_PROVIDERS} from "angular2/http";
 })
 @RouteConfig([
     {path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true},
-    {path: '/judgments/...', name: 'Judgments', component: JudgmentComponent}
+    {path: '/judgments/...', name: 'Judgments', loader: () => require('es6-promise!./judgment/judgment.component')('JudgmentComponent')}
 ])
 export class AppComponent {}

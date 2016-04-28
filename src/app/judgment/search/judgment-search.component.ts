@@ -1,25 +1,23 @@
-import {Component} from "angular2/core";
-import {NgForm} from 'angular2/common';
-import {OnInit} from "angular2/core";
-import {JudgmentSearchService} from "./services/judgment-search.service";
-import {JudgmentConverter} from "./services/judgment.converter";
-import {SortingForm} from "./forms/sorting-form";
-import {JudgmentSearchForm} from "./forms/judgment-search-form";
-import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs/Observable";
-import {Judgment} from "./models/judgment";
-import {SearchResults} from "./models/search-results";
-import {JudgmentListComponent} from "./components/judgment-list.component";
-import {CourtTypeConverter} from "../../court/court-type/services/court-type.converter";
-import {CourtTypePipe} from "../../court/court-type/pipes/court-type.pipe";
-import {SupremeChamberService} from "../../court/supreme-courts/services/supreme-chamber.service";
-import {CommonCourtService} from "../../court/common-courts/services/common-court.service";
-import {CommonCourtConverter} from "../../court/common-courts/services/common-court.converter";
-import {CommonCourt} from "../../court/common-courts/models/common-court";
-import {CommonCourtDivision} from "../../court/common-courts/models/common-court-division";
-import {SupremeChamber} from "../../court/supreme-courts/models/supreme-chamber";
-import {SupremeChamberDivision} from "../../court/supreme-courts/models/supreme-chamber-division";
-import {SupremeChamberConverter} from "../../court/supreme-courts/services/supreme-chamber.converter";
+import {Component} from 'angular2/core';
+import {OnInit} from 'angular2/core';
+import {JudgmentSearchService} from './services/judgment-search.service';
+import {JudgmentConverter} from './services/judgment.converter';
+import {SortingForm} from './forms/sorting-form';
+import {JudgmentSearchForm} from './forms/judgment-search-form';
+import {Subject} from 'rxjs/Subject';
+import {Judgment} from './models/judgment';
+import {SearchResults} from './models/search-results';
+import {JudgmentListComponent} from './components/judgment-list.component';
+import {CourtTypeConverter} from '../../court/court-type/services/court-type.converter';
+import {CourtTypePipe} from '../../court/court-type/pipes/court-type.pipe';
+import {SupremeChamberService} from '../../court/supreme-courts/services/supreme-chamber.service';
+import {CommonCourtService} from '../../court/common-courts/services/common-court.service';
+import {CommonCourtConverter} from '../../court/common-courts/services/common-court.converter';
+import {CommonCourt} from '../../court/common-courts/models/common-court';
+import {CommonCourtDivision} from '../../court/common-courts/models/common-court-division';
+import {SupremeChamber} from '../../court/supreme-courts/models/supreme-chamber';
+import {SupremeChamberDivision} from '../../court/supreme-courts/models/supreme-chamber-division';
+import {SupremeChamberConverter} from '../../court/supreme-courts/services/supreme-chamber.converter';
 
 @Component({
     templateUrl: 'src/app/judgment/search/judgment-search.component.html',
@@ -52,22 +50,22 @@ export class JudgmentSearchComponent implements OnInit {
     public judgments: Judgment[];
     public errorMessage: string;
 
-    public courtTypes = ["All", "COMMON", "SUPREME", "CONSTITUTIONAL_TRIBUNAL", "NATIONAL_APPEAL_CHAMBER"];
+    public courtTypes = ['All', 'COMMON', 'SUPREME', 'CONSTITUTIONAL_TRIBUNAL', 'NATIONAL_APPEAL_CHAMBER'];
 
-    public model: JudgmentSearchForm = new JudgmentSearchForm("", "", this.courtTypes[0]);
+    public model: JudgmentSearchForm = new JudgmentSearchForm('', '', this.courtTypes[0]);
 
     public pageNumber: number = 0;
     public pageSize: number = 10;
     public totalPageNumber: number = 0;
 
-    public sortingFields = ["JUDGMENT_DATE", "DATABASE_ID", "REFERENCING_JUDGMENTS_COUNT"];
+    public sortingFields = ['JUDGMENT_DATE', 'DATABASE_ID', 'REFERENCING_JUDGMENTS_COUNT'];
     public sortingForm: SortingForm = new SortingForm(this.sortingFields[0]);
 
     public commonCourts: CommonCourt[] = [];
-    public commonCourtError: string = "";
+    public commonCourtError: string = '';
 
     public commonCourtDivisions: CommonCourtDivision[] = [];
-    public commonCourtDivisionsError: string = "";
+    public commonCourtDivisionsError: string = '';
 
     public scChambers: SupremeChamber[] = [];
     public scChamberDivisions: SupremeChamberDivision[] = [];
@@ -83,7 +81,7 @@ export class JudgmentSearchComponent implements OnInit {
         private _supremeChamberService: SupremeChamberService
     ) {
         this._searchFormStream
-            .switchMap((model:JudgmentSearchForm) => this._judgmentSearchService.search(model, this.pageNumber, this.sortingForm))
+            .switchMap((model: JudgmentSearchForm) => this._judgmentSearchService.search(model, this.pageNumber, this.sortingForm))
             .subscribe((searchResults: SearchResults) => {
                 this.judgments = searchResults.judgments;
                 this.totalResults = searchResults.totalResults;
@@ -112,20 +110,20 @@ export class JudgmentSearchComponent implements OnInit {
     updateCourtType(event: string, value: string): void {
         this.model.courtType = value;
 
-        if (this.model.courtType === "COMMON" && this.commonCourts.length === 0) {
+        if (this.model.courtType === 'COMMON' && this.commonCourts.length === 0) {
 
             this.clearSupremeCourtTypeModel();
 
-            //Load commonCourts
+            // Load commonCourts
             this._commonCourtService.getCommonCourts()
                 .subscribe(res => {
                     this.commonCourts = res;
-                    this.commonCourts.unshift(new CommonCourt(-1, "All", ""));
+                    this.commonCourts.unshift(new CommonCourt(-1, 'All', ''));
                 },
                 error => this.commonCourtError);
         }
 
-        if (this.model.courtType === "SUPREME" && this.scChambers.length === 0) {
+        if (this.model.courtType === 'SUPREME' && this.scChambers.length === 0) {
 
             this.clearCommonCourtTypeModel();
 
@@ -133,7 +131,7 @@ export class JudgmentSearchComponent implements OnInit {
                 .getSupremeChambers()
                 .subscribe(res => {
                     this.scChambers = res;
-                    this.scChambers.unshift(new SupremeChamber(-1, "All"));
+                    this.scChambers.unshift(new SupremeChamber(-1, 'All'));
                 },
                 error => this.scChamberError);
         }
@@ -142,17 +140,17 @@ export class JudgmentSearchComponent implements OnInit {
 
     updateCommonCourt(event: string, value: string): void {
         this.model.commonCourt = value;
-        this.model.commonCourtDivision = "";
+        this.model.commonCourtDivision = '';
         this.commonCourtDivisions = [];
 
         if (parseInt(this.model.commonCourt) > 0) {
 
-            //Load commonCourtDivisions
+            // Load commonCourtDivisions
             this._commonCourtService
                 .getCommonCourtDivisions(this.model.commonCourt)
                 .subscribe(res => {
                         this.commonCourtDivisions = res;
-                        this.commonCourtDivisions.unshift(new CommonCourtDivision(-1, "All"));
+                        this.commonCourtDivisions.unshift(new CommonCourtDivision(-1, 'All'));
                     },
                     error => this.commonCourtDivisionsError);
         }
@@ -169,12 +167,12 @@ export class JudgmentSearchComponent implements OnInit {
 
         if (parseInt(this.model.scChamberId) > 0) {
 
-            //Load scChamberId
+            // Load scChamberId
             this._supremeChamberService
                 .getSupremeChamberDivisions(this.model.scChamberId)
                 .subscribe(res => {
                         this.scChamberDivisions = res;
-                        this.scChamberDivisions.unshift(new SupremeChamberDivision(-1, "All"));
+                        this.scChamberDivisions.unshift(new SupremeChamberDivision(-1, 'All'));
                     },
                     error => this.scChamberDivisionError);
         }
@@ -187,13 +185,13 @@ export class JudgmentSearchComponent implements OnInit {
 
 
     private clearCommonCourtTypeModel() {
-        this.model.commonCourt = "";
-        this.model.commonCourtDivision = "";
+        this.model.commonCourt = '';
+        this.model.commonCourtDivision = '';
     }
 
     private clearSupremeCourtTypeModel() {
-        this.model.scChamberId = "";
-        this.model.scChamberDivisionId = "";
+        this.model.scChamberId = '';
+        this.model.scChamberDivisionId = '';
     }
 
 

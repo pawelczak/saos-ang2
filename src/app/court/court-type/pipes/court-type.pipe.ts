@@ -1,5 +1,5 @@
-import {Pipe} from "angular2/core";
-import {PipeTransform} from "angular2/core";
+import {Pipe} from 'angular2/core';
+import {PipeTransform} from 'angular2/core';
 
 @Pipe({
     name: 'courtType'
@@ -7,19 +7,19 @@ import {PipeTransform} from "angular2/core";
 export class CourtTypePipe implements PipeTransform {
 
 
-    //------------------------ LOGIC --------------------------
+    // ------------------------ LOGIC --------------------------
 
     transform(value: string, args: string[]) {
 
         switch (value) {
-            case "COMMON":
-                return "Sąd Powszechny";
-            case "SUPREME":
-                return "Sąd Najwyższy";
-            case "CONSTITUTIONAL_TRIBUNAL":
-                return "Trybunał Konstytucyjny";
-            case "NATIONAL_APPEAL_CHAMBER":
-                return "Krajowa Izba Odwoławcza";
+            case 'COMMON':
+                return 'Sąd Powszechny';
+            case 'SUPREME':
+                return 'Sąd Najwyższy';
+            case 'CONSTITUTIONAL_TRIBUNAL':
+                return 'Trybunał Konstytucyjny';
+            case 'NATIONAL_APPEAL_CHAMBER':
+                return 'Krajowa Izba Odwoławcza';
 
             default:
                 return value;

@@ -1,10 +1,10 @@
 export class JudgmentSearchForm {
 
-    public commonCourt: string = "";
-    public commonCourtDivision: string = "";
+    public commonCourt: string = '';
+    public commonCourtDivision: string = '';
 
-    public scChamberId: string = "";
-    public scChamberDivisionId: string = "";
+    public scChamberId: string = '';
+    public scChamberDivisionId: string = '';
 
     constructor(
         public all: string,
