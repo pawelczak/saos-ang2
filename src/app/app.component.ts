@@ -7,7 +7,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 
 @Component({
     selector: 'app',
-    templateUrl: './src/app/app.component.html',
+    template: require('./app.component.html'),
     directives: [
         ROUTER_DIRECTIVES
     ],

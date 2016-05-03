@@ -1,21 +1,21 @@
 import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from 'angular2/testing';
-import {CommonCourtConverter} from "./common-court.converter";
-import {CommonCourt} from "../models/common-court";
-import {CommonCourtDivision} from "../models/common-court-division";
+import {CommonCourtConverter} from './common-court.converter';
+import {CommonCourt} from '../models/common-court';
+import {CommonCourtDivision} from '../models/common-court-division';
 
 
 
 
-describe("CommonCourtConverter", () => {
+describe('CommonCourtConverter', () => {
 
     let commonCourtConverter = new CommonCourtConverter();
 
-    describe("convertCc", () => {
+    describe('convertCc', () => {
 
-        it("should be able to convertCc", () => {
+        it('should be able to convertCc', () => {
 
             //given
-            let rawCc = {id: 3, name: "Sąd w Piasecznie", type: "APPEAL"};
+            let rawCc = {id: 3, name: 'Sąd w Piasecznie', type: 'APPEAL'};
 
             //execute
             let expectedCc = commonCourtConverter.convertCc(rawCc);
@@ -27,12 +27,12 @@ describe("CommonCourtConverter", () => {
             expect(expectedCc.type).toEqual(rawCc.type);
         });
 
-        it("should be able to convertCcList", () => {
+        it('should be able to convertCcList', () => {
 
             //given
-            let rawCcList = [{id: 3, name: "Sąd w Piasecznie", type: "APPEAL"},
-                    {id: 6, name: "Sąd w Raszynie", type: "APPEAL"},
-                    {id: 7, name: "Sąd w Krośnie", type: "APPEAL"}];
+            let rawCcList = [{id: 3, name: 'Sąd w Piasecznie', type: 'APPEAL'},
+                    {id: 6, name: 'Sąd w Raszynie', type: 'APPEAL'},
+                    {id: 7, name: 'Sąd w Krośnie', type: 'APPEAL'}];
 
             //execute
             let expectedCcList = commonCourtConverter.convertCcList(rawCcList);
@@ -47,12 +47,12 @@ describe("CommonCourtConverter", () => {
     });
 
 
-    describe("convertCcDivision", () => {
+    describe('convertCcDivision', () => {
 
-        it("should be able to convertCcDivision", () => {
+        it('should be able to convertCcDivision', () => {
 
             //given
-            let rawCc = {id: 3, name: "Sąd w Piasecznie"};
+            let rawCc = {id: 3, name: 'Sąd w Piasecznie'};
 
             //execute
             let expectedCc = commonCourtConverter.convertCcDivision(rawCc);
@@ -63,11 +63,11 @@ describe("CommonCourtConverter", () => {
             expect(expectedCc.name).toEqual(rawCc.name);
         });
 
-        it("should be able to convertCcDivisionList", () => {
+        it('should be able to convertCcDivisionList', () => {
 
             //given
-            let rawCcDivisionList = [{id: 3, name: "Sąd w Piasecznie"},
-                {id: 6, name: "Sąd w Raszynie"}, {id: 7, name: "Sąd w Krośnie"}];
+            let rawCcDivisionList = [{id: 3, name: 'Sąd w Piasecznie'},
+                {id: 6, name: 'Sąd w Raszynie'}, {id: 7, name: 'Sąd w Krośnie'}];
 
             //execute
             let expectedCcDivisionList = commonCourtConverter.convertCcDivisionList(rawCcDivisionList);

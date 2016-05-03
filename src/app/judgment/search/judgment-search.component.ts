@@ -20,7 +20,7 @@ import {SupremeChamberDivision} from '../../court/supreme-courts/models/supreme-
 import {SupremeChamberConverter} from '../../court/supreme-courts/services/supreme-chamber.converter';
 
 @Component({
-    templateUrl: 'src/app/judgment/search/judgment-search.component.html',
+    template: require('./judgment-search.component.html'),
     styles: [`
     .ng-valid[required] {
       border-left: 5px solid #42A948; /* green */
@@ -50,7 +50,8 @@ export class JudgmentSearchComponent implements OnInit {
     public judgments: Judgment[];
     public errorMessage: string;
 
-    public courtTypes = ['All', 'COMMON', 'SUPREME', 'CONSTITUTIONAL_TRIBUNAL', 'NATIONAL_APPEAL_CHAMBER'];
+    public courtTypes = ['All', 'COMMON', 'SUPREME',
+        'CONSTITUTIONAL_TRIBUNAL', 'NATIONAL_APPEAL_CHAMBER'];
 
     public model: JudgmentSearchForm = new JudgmentSearchForm('', '', this.courtTypes[0]);
 

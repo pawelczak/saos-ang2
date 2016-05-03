@@ -1,13 +1,13 @@
 import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from 'angular2/testing';
 import {BaseRequestOptions, Response, ResponseOptions, Http} from 'angular2/http';
 import {MockBackend, MockConnection} from 'angular2/http/testing';
-import {provide} from "angular2/core";
-import {Judgment} from "../models/judgment";
-import {JudgmentDetailService} from "./judgment-detail.service";
-import {JudgmentDetailConverter} from "./judgment-detail.converter";
+import {provide} from 'angular2/core';
+import {Judgment} from '../models/judgment';
+import {JudgmentDetailService} from './judgment-detail.service';
+import {JudgmentDetailConverter} from './judgment-detail.converter';
 
 
-describe("JudgmentDetailService", () => {
+describe('JudgmentDetailService', () => {
 
     let rawJudgment = {id: 12};
 
@@ -20,7 +20,7 @@ describe("JudgmentDetailService", () => {
     }
 
 
-    describe("getJudgment", () => {
+    describe('getJudgment', () => {
 
         beforeEachProviders(() => [
             JudgmentDetailService,
@@ -35,7 +35,7 @@ describe("JudgmentDetailService", () => {
             })
         ]);
 
-        describe("success", () => {
+        describe('success', () => {
 
             beforeEach(inject([MockBackend], (backend: MockBackend) => {
                 const baseResponse = new Response(new ResponseOptions({
@@ -48,7 +48,7 @@ describe("JudgmentDetailService", () => {
             it('should return response when subscribed to getJudgment',
                 inject([JudgmentDetailService], (judgmentDetailService: JudgmentDetailService) => {
                     judgmentDetailService
-                        .getJudgment("12")
+                        .getJudgment('12')
                         .subscribe((judgment) => {
 
                             //assert
@@ -65,12 +65,12 @@ describe("JudgmentDetailService", () => {
         });
 
 
-        describe("fail", () => {
+        describe('fail', () => {
 
             beforeEach(inject([MockBackend], (backend: MockBackend) => {
                 const baseResponse = new Response(new ResponseOptions({
                     status: 500,
-                    body: {error: "Error"}
+                    body: {error: 'Error'}
                 }));
                 backend.connections.subscribe((c: MockConnection) => c.mockRespond(baseResponse));
             }));
@@ -78,12 +78,12 @@ describe("JudgmentDetailService", () => {
             it('should return Error when subscribed to getJudgment',
                 inject([JudgmentDetailService], (judgmentDetailService: JudgmentDetailService) => {
                     judgmentDetailService
-                        .getJudgment("12")
+                        .getJudgment('12')
                         .subscribe((judgment) => {
                         }, (error) => {
 
                             //assert
-                            expect(error).toEqual("Error");
+                            expect(error).toEqual('Error');
                         });
                 })
             );

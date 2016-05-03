@@ -1,6 +1,6 @@
-import {SupremeChamber} from "../models/supreme-chamber";
-import {SupremeChamberDivision} from "../models/supreme-chamber-division";
-import {Injectable} from "angular2/core";
+import {SupremeChamber} from '../models/supreme-chamber';
+import {SupremeChamberDivision} from '../models/supreme-chamber-division';
+import {Injectable} from 'angular2/core';
 
 @Injectable()
 export class SupremeChamberConverter {

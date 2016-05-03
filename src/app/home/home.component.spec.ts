@@ -1,5 +1,5 @@
 import {describe, expect, it, xit, inject, beforeEach, beforeEachProviders} from 'angular2/testing';
-import {HomeComponent} from "./home.component";
+import {HomeComponent} from './home.component';
 
 
 describe('HomeComponent', () => {

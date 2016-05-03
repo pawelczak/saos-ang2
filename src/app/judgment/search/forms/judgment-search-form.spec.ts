@@ -7,10 +7,10 @@ describe('JudgmentSearchForm', () => {
 
     it('should be possible to create new object with properties: all, judgeName, courtType', () => {
 
-        //given
+        // given
         let judgmentSearchForm = new JudgmentSearchForm('whatever', 'John Smith', 'COMMON');
 
-        //assert
+        // assert
         expect(judgmentSearchForm.all).toEqual('whatever');
         expect(judgmentSearchForm.judgeName).toEqual('John Smith');
         expect(judgmentSearchForm.courtType).toEqual('COMMON');

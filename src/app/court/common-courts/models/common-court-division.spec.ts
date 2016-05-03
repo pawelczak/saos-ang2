@@ -1,15 +1,15 @@
 import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from 'angular2/testing';
-import {CommonCourtDivision} from "./common-court-division";
+import {CommonCourtDivision} from './common-court-division';
 
 
 
-describe("CommonCourtDivision", () => {
+describe('CommonCourtDivision', () => {
 
 
-    it ("should be possible to create CommonCourtDivision object", () => {
+    it ('should be possible to create CommonCourtDivision object', () => {
 
         //given
-        let rawCcDivision = {id: 87, name: "Wydział III"};
+        let rawCcDivision = {id: 87, name: 'Wydział III'};
 
         //execute
         let expectedCcDivision = new CommonCourtDivision(rawCcDivision.id, rawCcDivision.name);

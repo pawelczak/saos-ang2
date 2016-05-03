@@ -1,8 +1,8 @@
 import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from 'angular2/testing';
-import {CourtTypePipe} from "./court-type.pipe";
+import {CourtTypePipe} from './court-type.pipe';
 
 
-describe("CourtTypePipe", () => {
+describe('CourtTypePipe', () => {
 
     let courtTypePipe: CourtTypePipe;
 
@@ -10,13 +10,13 @@ describe("CourtTypePipe", () => {
         courtTypePipe = new CourtTypePipe();
     });
 
-    it ("should transform valid court types", () => {
+    it ('should transform valid court types', () => {
 
         //given
-        let courtTypeOne = "COMMON",
-            courtTypeTwo = "SUPREME",
-            courtTypeThree = "CONSTITUTIONAL_TRIBUNAL",
-            courtTypeFour = "NATIONAL_APPEAL_CHAMBER";
+        let courtTypeOne = 'COMMON',
+            courtTypeTwo = 'SUPREME',
+            courtTypeThree = 'CONSTITUTIONAL_TRIBUNAL',
+            courtTypeFour = 'NATIONAL_APPEAL_CHAMBER';
 
         //execute
         let expectedCourtTypeOne = courtTypePipe.transform(courtTypeOne, []),
@@ -26,15 +26,15 @@ describe("CourtTypePipe", () => {
 
 
         //assert
-        expect(expectedCourtTypeOne).toBe("Sąd Powszechny");
-        expect(expectedCourtTypeTwo).toBe("Sąd Najwyższy");
-        expect(expectedCourtTypeThree).toBe("Trybunał Konstytucyjny");
-        expect(expectedCourtTypeFour).toBe("Krajowa Izba Odwoławcza");
+        expect(expectedCourtTypeOne).toBe('Sąd Powszechny');
+        expect(expectedCourtTypeTwo).toBe('Sąd Najwyższy');
+        expect(expectedCourtTypeThree).toBe('Trybunał Konstytucyjny');
+        expect(expectedCourtTypeFour).toBe('Krajowa Izba Odwoławcza');
     });
 
-    it ("should not transform not valid court type", () => {
+    it ('should not transform not valid court type', () => {
         //given
-        let courtTypeOne = "whatever";
+        let courtTypeOne = 'whatever';
 
         //execute
         let expectedCourtTypeOne = courtTypePipe.transform(courtTypeOne, []);

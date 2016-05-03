@@ -1,18 +1,18 @@
-import {SupremeChamberConverter} from "./supreme-chamber.converter";
-import {SupremeChamber} from "../models/supreme-chamber";
-import {SupremeChamberDivision} from "../models/supreme-chamber-division";
+import {SupremeChamberConverter} from './supreme-chamber.converter';
+import {SupremeChamber} from '../models/supreme-chamber';
+import {SupremeChamberDivision} from '../models/supreme-chamber-division';
 
 
-describe("SupremeChamberConverter", () => {
+describe('SupremeChamberConverter', () => {
 
     let supremeChamberConverter = new SupremeChamberConverter();
 
-    describe("convertChamber", () => {
+    describe('convertChamber', () => {
 
-        it("should be able to convertChamber", () => {
+        it('should be able to convertChamber', () => {
 
             //given
-            let rawChamber = {id: 12, name: "Izba Cywilna"};
+            let rawChamber = {id: 12, name: 'Izba Cywilna'};
 
             //execute
             let expectedChamber = supremeChamberConverter.convertChamber(rawChamber);
@@ -25,12 +25,12 @@ describe("SupremeChamberConverter", () => {
 
     });
 
-    describe("convertChamberList", () => {
+    describe('convertChamberList', () => {
 
-        it("should be able to convertChamberList", () => {
+        it('should be able to convertChamberList', () => {
 
             //given
-            let rawChamberList = [{id: 12, name: "Izba Cywilna"}, {id: 14, name: "Izba Cywilna 2"}, {id: 18, name: "Izba Cywilna 3"}];
+            let rawChamberList = [{id: 12, name: 'Izba Cywilna'}, {id: 14, name: 'Izba Cywilna 2'}, {id: 18, name: 'Izba Cywilna 3'}];
 
             //execute
             let expectedChamberList = supremeChamberConverter.convertChamberList(rawChamberList);
@@ -44,12 +44,12 @@ describe("SupremeChamberConverter", () => {
 
     });
 
-    describe("convertChamberDivision", () => {
+    describe('convertChamberDivision', () => {
 
-        it("should be able to convertChamberDivision", () => {
+        it('should be able to convertChamberDivision', () => {
 
             //given
-            let rawChamberDivision = {id: 12, name: "Wydział I"};
+            let rawChamberDivision = {id: 12, name: 'Wydział I'};
 
             //execute
             let expectedChamberDivision = supremeChamberConverter.convertChamberDivision(rawChamberDivision);
@@ -62,12 +62,12 @@ describe("SupremeChamberConverter", () => {
 
     });
 
-    describe("convertChamberDivisionList", () => {
+    describe('convertChamberDivisionList', () => {
 
-        it("should be able to convertChamberDivisionList", () => {
+        it('should be able to convertChamberDivisionList', () => {
 
             //given
-            let rawChamberDivisionList = [{id: 12, name: "Wydział I"}, {id: 14, name: "Wydział II"}, {id: 18, name: "Wydział III"}];
+            let rawChamberDivisionList = [{id: 12, name: 'Wydział I'}, {id: 14, name: 'Wydział II'}, {id: 18, name: 'Wydział III'}];
 
             //execute
             let expectedChamberDivisionList = supremeChamberConverter.convertChamberDivisionList(rawChamberDivisionList);

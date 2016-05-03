@@ -1,6 +1,6 @@
 import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from 'angular2/testing';
 import {TestComponentBuilder, ComponentFixture, injectAsync} from 'angular2/testing';
-import {DetailComponent} from "./detail.component";
+import {DetailComponent} from './detail.component';
 
 
 describe('DetailComponent', () => {
@@ -15,12 +15,12 @@ describe('DetailComponent', () => {
                 let detail = fixture.componentInstance,
                     element = fixture.nativeElement;
 
-                detail.label = "Date";
-                detail.value = "Great date";
+                detail.label = 'Date';
+                detail.value = 'Great date';
 
                 fixture.detectChanges(); //trigger change detection
-                expect(element.querySelector('div span.col-sm-2')).toHaveText("Date:");
-                expect(element.querySelector('div span.col-sm-8')).toHaveText("Great date");
+                expect(element.querySelector('div span.col-sm-2')).toHaveText('Date:');
+                expect(element.querySelector('div span.col-sm-8')).toHaveText('Great date');
             });
         })
     );

@@ -1,15 +1,15 @@
 import {describe, expect, it, xit, inject, beforeEachProviders, beforeEach} from 'angular2/testing';
-import {Router} from "angular2/router";
-import {RouteRegistry} from "angular2/router";
-import {provide} from "angular2/core";
-import {SpyLocation} from "angular2/src/mock/location_mock";
-import {ROUTER_PRIMARY_COMPONENT} from "angular2/router";
-import {RootRouter} from "angular2/src/router/router";
-import {JudgmentComponent} from "./judgment.component";
+import {Router} from 'angular2/router';
+import {RouteRegistry} from 'angular2/router';
+import {provide} from 'angular2/core';
+import {SpyLocation} from 'angular2/src/mock/location_mock';
+import {ROUTER_PRIMARY_COMPONENT} from 'angular2/router';
+import {RootRouter} from 'angular2/src/router/router';
+import {JudgmentComponent} from './judgment.component';
 
 
 
-describe("JudgmentComponent", () => {
+describe('JudgmentComponent', () => {
 /*
     var location, router;
 
