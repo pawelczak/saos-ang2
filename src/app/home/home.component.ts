@@ -10,8 +10,4 @@ export class HomeComponent {
         private _router: Router
     ) {}
 
-    keyup(value) {
-        this._router.navigateByUrl('judgments/' + value);
-    }
-
 }
