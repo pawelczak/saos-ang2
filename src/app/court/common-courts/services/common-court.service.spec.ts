@@ -100,7 +100,7 @@ describe('CommonCourtService', () => {
 
     });
 
-    describe('getCommonCourtDivisions for courtId '1' ', () => {
+    describe('getCommonCourtDivisions for courtId "1" ', () => {
 
         describe('success', () => {
 
