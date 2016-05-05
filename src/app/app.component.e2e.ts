@@ -15,29 +15,29 @@ describe('AppComponent', () => {
 
     it('should have link to front page', () => {
 
-        //given
+        // given
         let link = element(by.css('app nav .navbar-header .navbar-brand'));
 
-        //assert
+        // assert
         expect(link.isPresent()).toEqual(true);
         expect(link.getText()).toEqual('SAOS-ang2');
     });
 
     it('should have navigation links container', () => {
 
-        //given
+        // given
         let links = element(by.css('app #navbar ul:nth-child(2)'));
 
-        //assert
+        // assert
         expect(links.isPresent()).toEqual(true);
     });
 
     it('should have navigation links', () => {
 
-        //given
+        // given
         let links = element.all(by.css('app #navbar ul:nth-child(2) li'));
 
-        //assert
+        // assert
         expect(links.count()).toEqual(2);
         expect(links.get(0).getText()).toEqual('Home');
         expect(links.get(1).getText()).toEqual('Judgment Search');
@@ -45,10 +45,10 @@ describe('AppComponent', () => {
 
     it('should be possible to navigate to home view', () => {
 
-        //execute
+        // execute
         element.all(by.css('app #navbar ul:nth-child(2) li')).get(0).element(by.css('a')).click();
 
-        //assert
+        // assert
         expect(browser.getCurrentUrl()).toBe('http://localhost:3000/home');
     });
 

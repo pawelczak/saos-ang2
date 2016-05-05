@@ -17,6 +17,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 })
 @RouteConfig([
     {path: '/home', name: 'Home', component: HomeComponent, useAsDefault: true},
-    {path: '/judgments/...', name: 'Judgments', loader: () => require('es6-promise!./judgment/judgment.component')('JudgmentComponent')}
+    {path: '/judgments/...', name: 'Judgments',
+        loader: () => require('es6-promise!./judgment/judgment.component')('JudgmentComponent')}
 ])
 export class AppComponent {}

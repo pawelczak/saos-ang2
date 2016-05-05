@@ -86,7 +86,7 @@ export class JudgmentSearchComponent implements OnInit {
             .subscribe((searchResults: SearchResults) => {
                 this.judgments = searchResults.judgments;
                 this.totalResults = searchResults.totalResults;
-                this.totalPageNumber = Math.ceil(searchResults.totalResults/this.pageSize);
+                this.totalPageNumber = Math.ceil(searchResults.totalResults / this.pageSize);
             });
     }
 
